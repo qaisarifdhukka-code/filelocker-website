@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="Why FileLocker was built, its product philosophy, and what's coming next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h1>Built because professionals deserved better than a plain USB.</h1>
+    <p>FileLocker exists to close one specific, overlooked gap: encrypted file delivery on physical media that anyone can actually use.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The story</div>
+      <h2>The gap nobody had fixed.</h2>
+    </div>
+    <p style="max-width:640px; color:var(--ink-soft); font-size:15.5px;">Lawyers, photographers, accountants, and healthcare providers all share the same routine: sensitive files, handed to clients on a USB drive. The tools that existed to protect that handoff — VeraCrypt, 7-Zip, and the like — all shared the same flaw. They assumed the recipient could and would install matching software. Most clients can't, won't, or don't know how. FileLocker was built to remove that assumption entirely.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The mission</div>
+      <h2>Military-grade security, handed over as easily as a USB drive.</h2>
+    </div>
+    <p style="max-width:640px; color:var(--ink-soft); font-size:15.5px;">Making real encryption simple enough that it fits into a workflow professionals already use — instead of asking them to change how they deliver files at all.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Product philosophy</div>
+      <h2>Three principles, no exceptions.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Zero compromise on security</h3>
+        <p>AES-256-GCM and Argon2id are non-negotiable. Convenience never comes at the cost of the underlying cryptography.</p>
+      </div>
+      <div class="feature">
+        <h3>Zero friction for recipients</h3>
+        <p>If the person receiving the file has to install anything, the design has failed. A browser is the only requirement.</p>
+      </div>
+      <div class="feature">
+        <h3>Zero subscription fees</h3>
+        <p>Pay once, own it. Security tools shouldn't come with a recurring bill attached.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Roadmap</div>
+      <h2>What's coming next.</h2>
+    </div>
+    <ul class="legal-content" style="max-width:640px;">
+      <li>macOS sender app</li>
+      <li>Configurable lockout modes beyond the current Pro implementation</li>
+      <li>Team and multi-seat licenses</li>
+      <li>Optional local audit trail log for encryption activity</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Try FileLocker on your next client delivery.</h2>
+      <div class="hero-actions">
+        <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

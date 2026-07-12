@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="FileLocker uses AES-256-GCM encryption and Argon2id key derivation. Decryption happens entirely in the browser via the Web Crypto API — no servers, no cloud, no data transmission.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">Security</div>
+    <h1>Military-grade is not marketing. It is mathematics.</h1>
+    <p>Every claim on this page is verifiable. No trust required — just cryptography.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="security-cols">
+      <div class="security-col">
+        <span class="step-num mono">01</span>
+        <h3>AES-256-GCM Encryption</h3>
+        <p>The Advanced Encryption Standard with 256-bit keys, in Galois/Counter Mode. The same cipher the US National Security Agency approves for Top Secret classification. Cracking it by brute force with every computer on Earth running in parallel would take longer than the age of the universe.</p>
+      </div>
+      <div class="security-col">
+        <span class="step-num mono">02</span>
+        <h3>Argon2id Key Derivation</h3>
+        <p>Your password is never used directly as an encryption key. Argon2id — winner of the Password Hashing Competition — transforms it into a cryptographic key while consuming enough memory and time to make automated brute-force attacks computationally infeasible.</p>
+      </div>
+      <div class="security-col">
+        <span class="step-num mono">03</span>
+        <h3>Zero Data Transmission</h3>
+        <p>Decryption happens entirely inside the recipient's browser using the native Web Crypto API. No file, password, or metadata ever touches a server. FileLocker has no cloud infrastructure — because it needs none.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="security-section">
+      <div>
+        <div class="eyebrow">Web Crypto API</div>
+        <h2>Decryption runs in the browser. Nowhere else.</h2>
+        <p>FileLocker's unlock page uses the Web Crypto API — a cryptography implementation built directly into every modern browser. There are no third-party libraries to audit, no external dependencies to trust, and no network calls to intercept. The decryption key is derived and used entirely in local browser memory, then discarded.</p>
+      </div>
+      <div class="badge-grid">
+        <div class="sec-badge">AES-256-GCM</div>
+        <div class="sec-badge">Argon2id KDF</div>
+        <div class="sec-badge">Web Crypto API</div>
+        <div class="sec-badge">Zero Transmission</div>
+        <div class="sec-badge">No Cloud Infra</div>
+        <div class="sec-badge">Offline-First</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Threat model</div>
+      <h2>What FileLocker protects against — and what it doesn't.</h2>
+      <p>Security is about being specific, not making blanket claims. Here's exactly where FileLocker helps.</p>
+    </div>
+    <div class="threat-list">
+      <div class="threat-row">
+        <span class="label">USB drive lost or stolen</span>
+        <span class="status protected">Protected</span>
+      </div>
+      <div class="threat-row">
+        <span class="label">File intercepted during physical handoff</span>
+        <span class="status protected">Protected</span>
+      </div>
+      <div class="threat-row">
+        <span class="label">Unauthorized third party opens the drive</span>
+        <span class="status protected">Protected</span>
+      </div>
+      <div class="threat-row">
+        <span class="label">Cloud provider data breach</span>
+        <span class="status protected">Not applicable — no cloud used</span>
+      </div>
+      <div class="threat-row">
+        <span class="label">Forgotten password with no hint saved</span>
+        <span class="status by-design">No recovery — by design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Compliance</div>
+      <h2>Built for regulated workflows.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>HIPAA § 164.312</h3>
+        <p>The HIPAA Security Rule's technical safeguards call for encryption of electronic protected health information at rest and in transit. FileLocker's offline AES-256 encryption is built to support this requirement for physical media.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M7.5 10V7a4.5 4.5 0 0 1 9 0v3"/></svg></div>
+        <h3>GDPR Article 32</h3>
+        <p>Article 32 requires "appropriate technical and organisational measures" including encryption of personal data. Delivering files pre-encrypted on physical media, with decryption keys shared separately, is one such measure.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/></svg></div>
+        <h3>Verify with your compliance officer</h3>
+        <p>FileLocker aids compliance — it is not a substitute for a compliance program. Always confirm specifics with your own compliance officer or legal counsel before relying on it for a regulated workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Trust is earned through mathematics, not marketing.</h2>
+      <p>Start delivering sensitive files with encryption your compliance officer can actually verify.</p>
+      <div class="hero-actions">
+        <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
+        <a href="/how-it-works.html" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

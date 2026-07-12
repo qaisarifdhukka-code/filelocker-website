@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="Answers to every common question about FileLocker: encryption, recipient experience, security, pricing, and platform support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h1>Every question. Answered honestly.</h1>
+    <p>If your question isn't here, reach out — we respond within 24 hours on business days.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">General</div>
+      <h2>The basics.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What is FileLocker?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>FileLocker is a Windows desktop app that encrypts any file or folder onto a USB drive with AES-256-GCM, plus a standalone unlock page the recipient opens in their own browser — no software install required on their end.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who is FileLocker for?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Professionals who hand sensitive files to clients on physical media — lawyers, photographers, accountants, and healthcare providers are the most common, but anyone with the same need fits.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is this different from VeraCrypt or 7-Zip?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Those tools require your recipient to install matching software to decrypt anything. FileLocker's recipient side is a single HTML file that runs in any browser — nothing to install, nothing to configure.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does FileLocker store any of my data?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. FileLocker operates entirely offline. Your files, passwords, and metadata never touch a server, because there is no server involved.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Technical</div>
+      <h2>Under the hood.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What encryption does FileLocker use?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>AES-256-GCM — the same cipher standard approved for top-secret classification, combined with authenticated encryption to detect tampering.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is the encryption key derived?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>From your password, using Argon2id — winner of the Password Hashing Competition, chosen specifically to resist brute-force attacks.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's the maximum file size?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Stream-based AES-GCM chunking means files of 10GB and well beyond encrypt without memory issues. The real limit is your USB drive's storage capacity.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I encrypt multiple files or a whole folder?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Yes. Select a folder and FileLocker zips it in memory automatically before encrypting the entire archive as one vault.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Recipient experience</div>
+      <h2>What your client sees.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Does the recipient need to install anything?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. They open a single HTML file — Unlock_Vault.html — directly in any modern browser.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which browsers are supported for unlocking?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Chrome, Edge, Safari, and Firefox are all fully supported.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which operating systems work for unlocking?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Any — Windows, Mac, or Linux. Only a modern browser is required, not a specific OS.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if the recipient forgets the password?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>On Standard, there's no recovery option by design. You can set an optional password hint when creating the vault to help without giving away the password itself.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Security &amp; privacy</div>
+      <h2>Trust, verified.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What happens if the USB drive is lost or stolen?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Nothing. The encrypted vault is unreadable without the correct password — there's no backdoor and no recovery mechanism on Standard.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is FileLocker HIPAA compliant?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>FileLocker's offline AES-256 encryption is built to support HIPAA's physical media requirements. Always confirm specifics with your own compliance officer before relying on it for a regulated workflow.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is FileLocker GDPR compliant?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>The same applies — FileLocker supports GDPR Article 32's call for appropriate technical measures, but compliance is ultimately your organization's responsibility to confirm.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a backdoor for FileLocker to unlock my files?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. There is no master key and no recovery service. Nobody at FileLocker can decrypt your vault on your behalf.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pricing &amp; licensing</div>
+      <h2>Money questions.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What's the difference between Standard and Pro?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Pro adds white-label branding on the unlock screen, a configurable failed-attempt lockout with recovery key, priority support, and early macOS access. See the full comparison on the Pricing page.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a free trial?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Not currently — reach out via Contact if you'd like a walkthrough before purchasing.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do updates cost extra?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. Both plans include lifetime updates at no additional cost.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer refunds?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>If FileLocker doesn't work as described on your system, contact support within 14 days of purchase.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Platform</div>
+      <h2>Compatibility specifics.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Does the sender app work on Mac?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Not yet. The FileLocker desktop encryption app currently runs on Windows 10 and 11 only; macOS support is on the roadmap.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does the sender app work on Linux?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No — Windows only for the sender app. Recipients on any OS, including Linux, can unlock files without issue.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which Windows versions are supported?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Windows 10 and Windows 11, both 64-bit.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Still have a question?</h2>
+      <p>We respond within 24 hours on business days.</p>
+      <div class="hero-actions">
+        <a href="/contact.html" class="btn btn-primary">Contact us →</a>
+        <a href="/pricing.html" class="btn btn-ghost">Get FileLocker</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="FileLocker pricing: Just $29 one-time. No subscriptions, no monthly fees, everything included.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+<style>
+  .single-pricing-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #EAEAEA;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    display: flex;
+    overflow: hidden;
+  }
+  .pricing-left {
+    flex: 0 0 40%;
+    padding: 48px 40px;
+    text-align: center;
+    background: white;
+    border-right: 1px solid #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .pricing-right {
+    flex: 1;
+    padding: 48px 40px;
+  }
+  .pricing-left .tier-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #6B7280;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pricing-left .price-amount {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 64px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .pricing-left .price-amount del {
+    color: #9CA3AF;
+    font-size: 40px;
+    font-weight: 500;
+  }
+  .pricing-left .price-amount span {
+    font-size: 20px;
+    color: #4B5563;
+    font-weight: 500;
+    display: block;
+    margin-top: 8px;
+  }
+  .pricing-left .btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  .pricing-left .price-note {
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.5;
+  }
+  
+  .pricing-right h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 24px;
+  }
+  .pricing-right .price-list {
+    margin: 0;
+  }
+  .pricing-right .price-list li {
+    padding: 10px 0;
+    border-bottom: none;
+    font-size: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .single-pricing-card {
+      flex-direction: column;
+    }
+    .pricing-left {
+      border-right: none;
+      border-bottom: 1px solid #EAEAEA;
+    }
+  }
+</style>
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">Pricing</div>
+    <h1>Pay once. Own it forever.</h1>
+    <p>Everything included. No subscriptions. No monthly fees. No surprises.</p>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0;">
+  <div class="wrap">
+    <div class="single-pricing-card">
+      <div class="pricing-left">
+        <div class="tier-name">FileLocker</div>
+        <div class="price-amount"><del>$59</del>$29</div>
+        <div class="price-note" style="font-weight: 500; color: #4B5563; font-size: 16px; margin-top: 4px;">one-time</div>
+        <a href="#" class="btn btn-primary">Get FileLocker</a>
+        <div class="price-note">Secure lifetime access.<br>No monthly fees.</div>
+      </div>
+      <div class="pricing-right">
+        <h3>Included Features</h3>
+        <ul class="price-list">
+          <li>FileLocker desktop app (Windows 10 &amp; 11)</li>
+          <li>AES-256-GCM military-grade encryption</li>
+          <li>Zero-install recipient experience</li>
+          <li>Full white-labeling &amp; custom branding</li>
+          <li>Unlimited file encryption (up to 10GB+)</li>
+          <li>Password hints &amp; strength meter</li>
+          <li>Priority email support</li>
+          <li>Lifetime updates included</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">The Risk of Not Buying</div>
+      <h2>Handing over unencrypted USB drives is a massive liability.</h2>
+      <p style="max-width: 700px; margin: 0 auto; color: #4B5563; font-size: 18px; line-height: 1.6;">
+        If you lose a standard USB drive containing sensitive client documents, medical records, or financial statements, you are legally liable for a data breach. FileLocker mathematically guarantees that lost drives remain completely unreadable to anyone who finds them. The peace of mind is worth $29.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pricing FAQ</div>
+      <h2>Questions about payment and licensing.</h2>
+    </div>
+    <div class="faq-list" id="pricingFaqList">
+      <div class="faq-item">
+        <div class="faq-q">What payment methods do you accept?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>All major credit and debit cards, processed securely through our checkout provider. Pricing is shown in USD.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a free trial?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>We don't offer a free trial, but we have a comprehensive 90-second demo video that shows exactly how the software works. Additionally, we provide a 30-day money-back guarantee.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is your money-back guarantee?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>We offer a strict 30-day no-questions-asked money-back guarantee. If FileLocker doesn't perfectly suit your workflow, simply email us within 30 days and we will refund your $29 immediately.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do updates cost extra?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. Your one-time purchase includes lifetime updates to the software at no additional cost.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer enterprise or team pricing?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Yes — for 5 or more licenses, contact us directly for volume pricing tailored to your firm.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Need 5+ licenses?</h2>
+      <p>Contact us for enterprise pricing tailored to your firm or team.</p>
+      <div class="hero-actions">
+        <a href="/contact.html" class="btn btn-primary">Contact sales →</a>
+        <a href="#pricing" class="btn btn-ghost">Back to pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <span>One-time Payment</span>
+    <span>Lifetime Updates Included</span>
+    <span>30-Day Money-Back Guarantee</span>
+    <span>No Subscription — Ever</span>
+  </div>
+</div>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

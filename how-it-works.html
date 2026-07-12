@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="See exactly how FileLocker encrypts files onto a USB drive and how recipients unlock them in any browser, with zero install.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h1>Two steps for you. One click for them.</h1>
+    <p>Here's exactly what happens on both ends of the process, and why it can't be intercepted.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Sender workflow</div>
+      <h2>What you do, step by step.</h2>
+      <p>Five steps in FileLocker, start to finish, usually under a minute.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <span class="num mono">01</span>
+        <div><h3>Plug in your USB drive</h3><p>FileLocker detects connected drives automatically and lists them for you to choose from.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">02</span>
+        <div><h3>Select your file or folder</h3><p>Choose any file, or a whole folder — FileLocker zips folders in memory automatically before encrypting.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">03</span>
+        <div><h3>Set a vault password</h3><p>A built-in strength meter confirms your password is strong enough, and you can add an optional hint for your recipient.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">04</span>
+        <div><h3>FileLocker encrypts the file</h3><p>AES-256-GCM encryption runs locally, with the key derived from your password using Argon2id.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">05</span>
+        <div><h3>Done — drive ready to hand off</h3><p>The encrypted vault and a standalone Unlock_Vault.html file are written to the USB. Unplug and deliver.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Recipient workflow</div>
+      <h2>What your client does, step by step.</h2>
+      <p>Three steps. No install. No account. No internet connection required.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <span class="num mono">01</span>
+        <div><h3>Plug in the USB drive</h3><p>They open the drive in their file explorer like any other USB drive — no special software needed to view it.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">02</span>
+        <div><h3>Open Unlock_Vault.html and enter the password</h3><p>Double-clicking the file opens it directly in their default browser — Chrome, Edge, Safari, or Firefox all work.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="num mono">03</span>
+        <div><h3>Their file downloads automatically</h3><p>The moment the password is verified, the original file decrypts locally and downloads straight to their computer.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="security-cols">
+      <div class="security-col">
+        <span class="step-num mono">BEHIND THE SCENES</span>
+        <h3>What's actually happening</h3>
+        <p>Every file is encrypted with AES-256-GCM, the same cipher standard approved for top-secret data. Your password never becomes the encryption key directly — that would be too easy to guess-and-check.</p>
+      </div>
+      <div class="security-col">
+        <span class="step-num mono">KEY DERIVATION</span>
+        <h3>Why Argon2id matters</h3>
+        <p>Argon2id turns your password into a cryptographic key using deliberately heavy memory and time costs, making automated brute-force guessing computationally impractical, even on powerful hardware.</p>
+      </div>
+      <div class="security-col">
+        <span class="step-num mono">WHY IT HOLDS UP</span>
+        <h3>No shortcuts, no backdoors</h3>
+        <p>There's no master key, no recovery service, and no way for FileLocker to unlock a vault on your behalf. That's what makes the encryption real instead of theatrical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">See it in action</div>
+      <h2>From encrypt to decrypt in under 2 minutes.</h2>
+      <p>Watch the full workflow — a lawyer encrypts a confidential brief and their client unlocks it without installing a single app.</p>
+    </div>
+    <div class="video-placeholder">
+      <div class="play-btn"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+      <p>90 SECONDS · CAPTIONED · NO SOFTWARE REQUIRED TO WATCH</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Common workflow questions.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Do I need an internet connection at any point?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. Both encryption and decryption happen entirely offline, on the local device. No step in the process requires a network connection.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I encrypt more than one file at a time?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>Yes — select a folder instead of a single file, and FileLocker automatically zips its contents in memory before encrypting the archive as one vault.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens if my client enters the wrong password?</div>
+        <div class="faq-a"><p>They can simply try again. On Standard there's no attempt limit; Pro lets you configure a lockout after a set number of failed attempts, with a recovery key held by you.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does the recipient need admin rights on their computer?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. Opening an HTML file and using their browser's built-in Web Crypto API requires no elevated permissions of any kind.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>See the whole workflow for yourself.</h2>
+      <p>$29 one-time. No subscription, no recurring fees, lifetime updates included.</p>
+      <div class="hero-actions">
+        <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
+        <a href="/security.html" class="btn btn-ghost">Read the security page</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

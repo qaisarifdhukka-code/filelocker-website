@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features — FileLocker</title>
+<link rel="icon" type="image/png" href="/Favicon.png">
+<meta name="description" content="Every FileLocker feature across security, sender, recipient, and Pro — plus a full comparison against VeraCrypt, 7-Zip, and plain USB delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+
+{{> header }}
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">Features</div>
+    <h1>Everything built for one job. Done right.</h1>
+    <p>No bloat, no unrelated tools bolted on. Every feature exists because encrypted file delivery needs it.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <h3 style="font-size:20px; margin-bottom:20px;">Security</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M7.5 10V7a4.5 4.5 0 0 1 9 0v3"/></svg></div>
+        <h3>AES-256-GCM</h3>
+        <p>The same cipher standard used by banks and governments. 256-bit keys, authenticated encryption.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg></div>
+        <h3>Argon2id Key Derivation</h3>
+        <p>Your password becomes a cryptographic key through a memory-hard process built to resist brute force.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/></svg></div>
+        <h3>Zero Data Transmission</h3>
+        <p>No file, password, or metadata ever leaves the physical devices involved. No servers exist to breach.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"/><path d="M9 9l6 6M15 9l-6 6"/></svg></div>
+        <h3>Configurable Lockout (Pro)</h3>
+        <p>Set a failed-attempt limit that locks the vault, with a recovery key held only by you.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 9h18"/></svg></div>
+        <h3>No Password Storage</h3>
+        <p>Passwords are never written to disk, logged, or transmitted anywhere — not even by FileLocker itself.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v16M4 12h16"/></svg></div>
+        <h3>Built for HIPAA &amp; GDPR Workflows</h3>
+        <p>Offline, encrypted physical delivery supports HIPAA and GDPR Article 32 technical safeguards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <h3 style="font-size:20px; margin-bottom:20px;">Sender (Windows app)</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <h3>Guided 5-Step Pipeline</h3>
+        <p>Drive → File → Password → Encrypt → Done. A clear, linear flow with no room to get lost.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 4h6l2 2h8v12H4z"/></svg></div>
+        <h3>File &amp; Folder Support</h3>
+        <p>Encrypt a single file or an entire folder — folders are zipped automatically before encryption.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v16M4 12h16"/></svg></div>
+        <h3>Password Hints</h3>
+        <p>Add an optional hint your recipient will see, without ever revealing the password itself.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></div>
+        <h3>Password Strength Meter</h3>
+        <p>Live feedback confirms your vault password is strong enough before you commit to it.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 7h4"/></svg></div>
+        <h3>Automatic USB Detection</h3>
+        <p>FileLocker lists connected drives automatically — no manual path entry required.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v16M4 12h16"/></svg></div>
+        <h3>Files Up to 10GB and Beyond</h3>
+        <p>Stream-based AES-GCM chunking handles large video files and datasets without memory issues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h3 style="font-size:20px; margin-bottom:20px;">Recipient (any browser, any OS)</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Zero Install</h3>
+        <p>One HTML file, opened directly in the browser. No download, no account, no support call.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 9h18"/></svg></div>
+        <h3>Windows, Mac &amp; Linux</h3>
+        <p>The unlock page runs on any operating system — only a modern browser is required.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></div>
+        <h3>All Major Browsers</h3>
+        <p>Chrome, Edge, Safari, and Firefox are all fully supported for decryption.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/></svg></div>
+        <h3>Single HTML File</h3>
+        <p>Everything the recipient needs lives in one self-contained file on the drive.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v10m0 0-4-4m4 4 4-4M5 18h14"/></svg></div>
+        <h3>Direct Download</h3>
+        <p>The moment the password is verified, the original file downloads straight to their computer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <h3 style="font-size:20px; margin-bottom:20px;">Pro exclusives</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></div>
+        <h3>White-Label Unlock Screen</h3>
+        <p>Your client sees your firm's brand on the unlock page — not FileLocker's.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><circle cx="12" cy="12" r="8"/></svg></div>
+        <h3>Custom Logo &amp; Colors</h3>
+        <p>Drop in your firm's logo and brand colors for a fully client-facing experience.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v16M4 12h16"/></svg></div>
+        <h3>Priority Email Support</h3>
+        <p>Pro customers get a faster response queue for support questions.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 6h16v12H4z"/></svg></div>
+        <h3>Early Access to macOS</h3>
+        <p>Pro license holders get first access when the macOS sender app becomes available.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Why FileLocker</div>
+      <h2>How it stacks up against what you're using now.</h2>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Feature</th><th>FileLocker</th><th>VeraCrypt</th><th>7-Zip</th><th>Plain USB</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Zero install for recipient</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>AES-256 encryption</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td></tr>
+          <tr><td>Works in any browser</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><td>Non-technical client friendly</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Password hint support</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><td>Data protected if drive is lost</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="badge-grid" style="grid-template-columns: repeat(4,1fr);">
+      <div class="sec-badge">AES-256-GCM</div>
+      <div class="sec-badge">Argon2id KDF</div>
+      <div class="sec-badge">Web Crypto API</div>
+      <div class="sec-badge">Offline-First</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Every feature. One price. No subscription.</h2>
+      <div class="hero-actions">
+        <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
+        <a href="/how-it-works.html" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer }}
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
