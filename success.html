@@ -7,20 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/css/style.css">
 <style>
-  .auth-container { max-width: 450px; margin: 100px auto; padding: 40px; background: white; border: 1px solid #EAEAEA; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
-  .auth-header { text-align: center; margin-bottom: 32px; }
+  .auth-container { max-width: 450px; margin: 100px auto; padding: 40px; background: white; border: 1px solid #EAEAEA; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); text-align: center; }
   .auth-header h1 { font-size: 24px; margin-bottom: 8px; color: #111827; }
-  .auth-form .form-group { margin-bottom: 20px; }
-  .auth-form label { display: block; font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 8px; }
-  .auth-form input { width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 15px; outline: none; transition: all 0.2s; }
-  .auth-form input:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-  .auth-form button { width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s; }
-  .auth-form button:hover { background: #1D4ED8; }
-  .auth-footer { text-align: center; margin-top: 24px; font-size: 14px; color: #6B7280; }
-  .auth-footer a { color: #2563EB; text-decoration: none; font-weight: 500; }
-  #errorMsg { color: #EF4444; font-size: 14px; margin-bottom: 16px; text-align: center; display: none; }
-  #successMsg { color: #10B981; font-size: 14px; margin-bottom: 16px; text-align: center; display: none; }
-  .celebration { font-size: 48px; text-align: center; margin-bottom: 16px; }
+  .celebration { font-size: 48px; margin-bottom: 16px; }
+  .loader { margin: 24px auto; border: 4px solid #F3F4F6; border-top: 4px solid #2563EB; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  #credentialsBox { display: none; background: #F3F4F6; border: 1px solid #E5E7EB; border-radius: 8px; padding: 24px; text-align: left; margin-top: 24px; }
+  .key-input { width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: monospace; font-size: 16px; font-weight: 600; background: white; text-align: center; color: #111827; margin-bottom: 16px; letter-spacing: 1px; }
 </style>
 </head>
 <body style="background: #F9FAFB; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
@@ -29,109 +22,89 @@
   <div class="celebration">🎉</div>
   <div class="auth-header">
     <h1>Payment Successful!</h1>
-    <p style="color: #6B7280; font-size: 15px;" id="subtitle">Click below to instantly generate your License Key.</p>
+    <p style="color: #6B7280; font-size: 15px;" id="subtitle">We're generating your License Key...</p>
   </div>
   
-  <div id="errorMsg"></div>
+  <div id="loadingState">
+    <div class="loader"></div>
+    <p style="font-size: 14px; color: #9CA3AF;">Waiting for secure payment verification...</p>
+  </div>
   
-  <button id="generateBtn" style="width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s;">
-    Generate My License Key
-  </button>
+  <div id="errorMsg" style="color: #EF4444; display: none; margin-top: 20px;"></div>
 
-  <div id="credentialsBox" style="display: none; background: #F3F4F6; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px; text-align: left; margin-top: 20px;">
-    <p style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 4px;">YOUR LICENSE KEY</p>
-    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-      <input type="text" id="displayKey" readonly style="flex: 1; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: monospace; font-size: 14px; background: white;">
-    </div>
+  <div id="credentialsBox">
+    <p style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 8px; text-align: center;">YOUR PRO LICENSE KEY</p>
+    <input type="text" id="displayKey" readonly class="key-input">
     
-    <p style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 4px;">YOUR AUTO-GENERATED DASHBOARD PASSWORD</p>
-    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-      <input type="text" id="displayPass" readonly style="flex: 1; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: monospace; font-size: 14px; background: white;">
-    </div>
-    <p style="font-size: 12px; color: #6B7280; margin-bottom: 16px;">We created an account so you can manage your key. Save this password!</p>
-
-    <button id="copyBtn" style="width: 100%; padding: 10px; background: #10B981; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer;">
-      Copy Credentials
+    <button id="copyBtn" style="width: 100%; padding: 12px; background: #10B981; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer;">
+      Copy License Key
     </button>
   </div>
   
-  <div id="dashboardLink" style="display: none; text-align: center; margin-top: 20px;">
+  <div id="dashboardLink" style="display: none; margin-top: 24px;">
     <a href="dashboard.html" style="color: #2563EB; text-decoration: none; font-weight: 500;">Go to my Dashboard →</a>
   </div>
 </div>
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const orderId = urlParams.get('order_id') || urlParams.get('orderId');
-
-  const generateBtn = document.getElementById('generateBtn');
+  const token = localStorage.getItem('fl_token');
   const errorMsg = document.getElementById('errorMsg');
   const credentialsBox = document.getElementById('credentialsBox');
+  const loadingState = document.getElementById('loadingState');
   const dashboardLink = document.getElementById('dashboardLink');
 
-  if (!orderId) {
-    errorMsg.textContent = 'Invalid link. Missing order ID.';
+  if (!token) {
+    errorMsg.textContent = 'You are not logged in. Please log in to view your license key.';
     errorMsg.style.display = 'block';
-    generateBtn.style.display = 'none';
-  }
-
-  // Generate a strong random password
-  function generatePassword() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*';
-    let pass = 'FL-';
-    for (let i = 0; i < 12; i++) {
-      pass += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return pass;
-  }
-
-  generateBtn.addEventListener('click', async () => {
-    generateBtn.textContent = 'Generating...';
-    generateBtn.disabled = true;
-    errorMsg.style.display = 'none';
+    loadingState.style.display = 'none';
+  } else {
+    // Poll the server for the new license (Lemon Squeezy webhooks take a few seconds)
+    let attempts = 0;
+    const maxAttempts = 15; // 30 seconds max
     
-    const autoPassword = generatePassword();
-    
-    try {
-      const res = await fetch('https://filelocker-license-server.onrender.com/api/claim-account', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId, password: autoPassword })
-      });
-      const data = await res.json();
-      
-      if (res.ok) {
-        // Log them in immediately
-        localStorage.setItem('fl_token', data.token);
+    async function fetchLicense() {
+      try {
+        const res = await fetch('https://filelocker-license-server.onrender.com/api/licenses', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
         
-        generateBtn.style.display = 'none';
-        document.getElementById('subtitle').textContent = 'Please save your credentials below:';
-        
-        // Show credentials
-        document.getElementById('displayKey').value = data.licenseKey;
-        document.getElementById('displayPass').value = autoPassword;
-        credentialsBox.style.display = 'block';
-        dashboardLink.style.display = 'block';
-      } else {
-        errorMsg.textContent = data.error || 'Failed to generate key. Please contact support.';
-        errorMsg.style.display = 'block';
-        generateBtn.textContent = 'Try Again';
-        generateBtn.disabled = false;
+        if (res.ok) {
+          const licenses = await res.json();
+          if (licenses.length > 0) {
+            // Found a license!
+            document.getElementById('displayKey').value = licenses[licenses.length - 1].license_key;
+            document.getElementById('subtitle').textContent = 'Your software is ready to activate.';
+            
+            loadingState.style.display = 'none';
+            credentialsBox.style.display = 'block';
+            dashboardLink.style.display = 'block';
+            return;
+          }
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
       }
-    } catch (err) {
-      errorMsg.textContent = 'Network error. Is the server running?';
-      errorMsg.style.display = 'block';
-      generateBtn.textContent = 'Try Again';
-      generateBtn.disabled = false;
+      
+      attempts++;
+      if (attempts < maxAttempts) {
+        setTimeout(fetchLicense, 2000); // Retry every 2 seconds
+      } else {
+        loadingState.style.display = 'none';
+        errorMsg.textContent = 'Payment takes a little longer to verify. Please check your Dashboard in a minute.';
+        errorMsg.style.display = 'block';
+        dashboardLink.style.display = 'block';
+      }
     }
-  });
+    
+    // Start polling
+    fetchLicense();
+  }
 
   document.getElementById('copyBtn').addEventListener('click', () => {
     const key = document.getElementById('displayKey').value;
-    const pass = document.getElementById('displayPass').value;
-    navigator.clipboard.writeText(`FileLocker License Key: ${key}\nDashboard Password: ${pass}`);
+    navigator.clipboard.writeText(key);
     document.getElementById('copyBtn').textContent = 'Copied!';
-    setTimeout(() => document.getElementById('copyBtn').textContent = 'Copy Credentials', 2000);
+    setTimeout(() => document.getElementById('copyBtn').textContent = 'Copy License Key', 2000);
   });
 </script>
 </body>
