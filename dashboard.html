@@ -10,15 +10,18 @@
 <style>
   body { background: #F9FAFB; }
   .dashboard-content { max-width: 900px; margin: 60px auto; padding: 0 20px; min-height: 60vh; }
-  .dashboard-header { margin-bottom: 40px; }
+  .dashboard-header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
   .dashboard-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 40px; color: #0A0A12; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.02em; }
-  .dashboard-header p { color: #6B7280; font-size: 18px; line-height: 1.5; }
+  .dashboard-header p { color: #6B7280; font-size: 18px; line-height: 1.5; margin: 0; }
+  
+  .download-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: #2563EB; color: white; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: background 0.2s; font-family: 'Inter', sans-serif; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2); }
+  .download-btn:hover { background: #1D4ED8; }
   
   .license-card { background: white; border: 1px solid #EAEAEA; border-radius: 12px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.02); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; transition: box-shadow 0.2s; }
   .license-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
   
   .license-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; font-weight: 700; margin-bottom: 8px; }
-  .license-key { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #111827; font-weight: 600; margin-bottom: 16px; letter-spacing: 1px; }
+  .license-key { font-family: 'Space Grotesk', monospace; font-size: 28px; color: #111827; font-weight: 600; margin-bottom: 16px; letter-spacing: 1px; }
   
   .status-badge { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; }
   .status-active { background: #DCFCE7; color: #166534; }
@@ -40,8 +43,14 @@
 
 <div class="dashboard-content">
   <div class="dashboard-header">
-    <h1>Your Licenses</h1>
-    <p>Manage your FileLocker software keys and active devices.</p>
+    <div>
+      <h1>Your Licenses</h1>
+      <p>Manage your FileLocker software keys and active devices.</p>
+    </div>
+    <a href="/downloads/FileLocker-Setup.exe" class="download-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Download App for Windows
+    </a>
   </div>
   
   <div id="licenseContainer">
