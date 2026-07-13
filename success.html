@@ -48,7 +48,7 @@
 <script>
   // Get the Lemon Squeezy order_id from the URL
   const urlParams = new URLSearchParams(window.location.search);
-  const orderId = urlParams.get('order_id');
+  const orderId = urlParams.get('order_id') || urlParams.get('orderId');
 
   if (!orderId) {
     const errorMsg = document.getElementById('errorMsg');
