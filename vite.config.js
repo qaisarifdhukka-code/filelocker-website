@@ -66,7 +66,6 @@ export default defineConfig({
         privacy: resolve(__dirname, 'privacy.html'),
         terms: resolve(__dirname, 'terms.html'),
         login: resolve(__dirname, 'login.html'),
-        register: resolve(__dirname, 'register.html'),
         dashboard: resolve(__dirname, 'dashboard.html'),
         success: resolve(__dirname, 'success.html'),
       },
