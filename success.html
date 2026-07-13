@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful — FileLocker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+<style>
+  .auth-container { max-width: 450px; margin: 100px auto; padding: 40px; background: white; border: 1px solid #EAEAEA; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+  .auth-header { text-align: center; margin-bottom: 32px; }
+  .auth-header h1 { font-size: 24px; margin-bottom: 8px; color: #111827; }
+  .auth-form .form-group { margin-bottom: 20px; }
+  .auth-form label { display: block; font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 8px; }
+  .auth-form input { width: 100%; padding: 12px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 15px; outline: none; transition: all 0.2s; }
+  .auth-form input:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+  .auth-form button { width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+  .auth-form button:hover { background: #1D4ED8; }
+  .auth-footer { text-align: center; margin-top: 24px; font-size: 14px; color: #6B7280; }
+  .auth-footer a { color: #2563EB; text-decoration: none; font-weight: 500; }
+  #errorMsg { color: #EF4444; font-size: 14px; margin-bottom: 16px; text-align: center; display: none; }
+  #successMsg { color: #10B981; font-size: 14px; margin-bottom: 16px; text-align: center; display: none; }
+  .celebration { font-size: 48px; text-align: center; margin-bottom: 16px; }
+</style>
+</head>
+<body style="background: #F9FAFB; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+<div class="auth-container">
+  <div class="celebration">🎉</div>
+  <div class="auth-header">
+    <h1>Payment Successful!</h1>
+    <p style="color: #6B7280; font-size: 15px;">Your FileLocker purchase is complete.<br>Please set a password for your account below.</p>
+  </div>
+  
+  <div id="errorMsg"></div>
+  <div id="successMsg"></div>
+
+  <form class="auth-form" id="claimForm">
+    <div class="form-group">
+      <label for="password">Create a Password</label>
+      <input type="password" id="password" required placeholder="••••••••">
+    </div>
+    <button type="submit">Activate Account</button>
+  </form>
+
+</div>
+
+<script>
+  // Get the Lemon Squeezy order_id from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('order_id');
+
+  if (!orderId) {
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.textContent = 'Invalid link. Missing order ID.';
+    errorMsg.style.display = 'block';
+    document.getElementById('claimForm').style.display = 'none';
+  }
+
+  document.getElementById('claimForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
+    
+    errorMsg.style.display = 'none';
+    
+    try {
+      const res = await fetch('http://localhost:3001/api/claim-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId, password })
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        // Log them in immediately with the returned token
+        localStorage.setItem('fl_token', data.token);
+        successMsg.textContent = 'Account activated! Redirecting to Dashboard...';
+        successMsg.style.display = 'block';
+        document.getElementById('claimForm').style.display = 'none';
+        
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1500);
+      } else {
+        errorMsg.textContent = data.error || 'Failed to activate account. Please contact support.';
+        errorMsg.style.display = 'block';
+      }
+    } catch (err) {
+      errorMsg.textContent = 'Network error. Is the server running?';
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

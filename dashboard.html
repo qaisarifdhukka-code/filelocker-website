@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — FileLocker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+<style>
+  body { background: #F9FAFB; }
+  .dashboard-nav { background: white; border-bottom: 1px solid #EAEAEA; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .dashboard-nav .logo { font-weight: 700; font-size: 20px; color: #111827; display: flex; align-items: center; gap: 8px; }
+  .dashboard-nav .logout { color: #6B7280; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
+  
+  .dashboard-content { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+  .dashboard-header { margin-bottom: 40px; }
+  .dashboard-header h1 { font-size: 32px; color: #111827; margin-bottom: 8px; }
+  .dashboard-header p { color: #6B7280; font-size: 16px; }
+  
+  .license-card { background: white; border: 1px solid #EAEAEA; border-radius: 12px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.02); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .license-info h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; font-weight: 700; margin-bottom: 8px; }
+  .license-key { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: #111827; font-weight: 600; margin-bottom: 16px; }
+  
+  .status-badge { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+  .status-active { background: #DCFCE7; color: #166534; }
+  .status-unused { background: #F3F4F6; color: #4B5563; }
+  
+  .action-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; border: 1px solid #D1D5DB; background: white; color: #374151; transition: all 0.2s; }
+  .action-btn:hover { background: #F9FAFB; }
+  
+  .empty-state { text-align: center; padding: 60px; background: white; border-radius: 12px; border: 1px dashed #D1D5DB; }
+  .empty-state h3 { font-size: 18px; color: #111827; margin-bottom: 8px; }
+  .empty-state p { color: #6B7280; margin-bottom: 24px; }
+  .empty-state .btn-primary { padding: 12px 24px; background: #2563EB; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="dashboard-nav">
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#2563EB"/><path d="M12 16V12M12 8H12.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    FileLocker
+  </div>
+  <a class="logout" onclick="logout()">Sign Out</a>
+</nav>
+
+<div class="dashboard-content">
+  <div class="dashboard-header">
+    <h1>Your Licenses</h1>
+    <p>Manage your FileLocker software keys and active devices.</p>
+  </div>
+  
+  <div id="licenseContainer">
+    <div style="text-align: center; color: #6B7280; padding: 40px;">Loading licenses...</div>
+  </div>
+</div>
+
+<script>
+  // Check auth
+  const token = localStorage.getItem('fl_token');
+  if (!token) window.location.href = 'login.html';
+
+  async function loadLicenses() {
+    try {
+      const res = await fetch('http://localhost:3001/api/licenses', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      
+      if (res.status === 401 || res.status === 403) {
+        logout();
+        return;
+      }
+      
+      const licenses = await res.json();
+      const container = document.getElementById('licenseContainer');
+      
+      if (licenses.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No Active Licenses</h3>
+            <p>You haven't purchased FileLocker yet.</p>
+            <a href="index.html#pricing" class="btn-primary">Buy FileLocker</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = licenses.map(lic => {
+        const isUsed = !!lic.used_by_hardware_id;
+        const statusClass = isUsed ? 'status-active' : 'status-unused';
+        const statusText = isUsed ? 'Active on a machine' : 'Unused';
+        
+        return `
+          <div class="license-card">
+            <div class="license-info">
+              <h3>Pro License Key</h3>
+              <div class="license-key">${lic.license_key}</div>
+              <div class="status-badge ${statusClass}">
+                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:currentColor; margin-right:6px; opacity:0.8;"></span>
+                ${statusText}
+              </div>
+              ${isUsed ? `<div style="margin-top:12px; font-size:12px; color:#9CA3AF; font-family:monospace;">Machine ID: ${lic.used_by_hardware_id}</div>` : ''}
+            </div>
+            <div>
+              ${isUsed 
+                ? `<button class="action-btn" onclick="unlinkMachine('${lic.license_key}')">Unlink Machine</button>`
+                : `<button class="action-btn" style="opacity:0.5; cursor:not-allowed;" disabled>Unlink Machine</button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+    } catch (err) {
+      console.error(err);
+      document.getElementById('licenseContainer').innerHTML = '<div style="color:red;">Error loading licenses. Is the server running?</div>';
+    }
+  }
+
+  async function unlinkMachine(licenseKey) {
+    if (!confirm('Are you sure you want to unlink this machine? It will no longer be able to use FileLocker until re-activated.')) return;
+    
+    try {
+      const res = await fetch('http://localhost:3001/api/unlink', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ licenseKey })
+      });
+      
+      if (res.ok) {
+        alert('Machine unlinked successfully! You can now use this key on a new computer.');
+        loadLicenses();
+      } else {
+        const data = await res.json();
+        alert('Error: ' + data.error);
+      }
+    } catch (err) {
+      alert('Network error.');
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('fl_token');
+    window.location.href = 'login.html';
+  }
+
+  loadLicenses();
+</script>
+</body>
+</html>
