@@ -8,142 +8,151 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/css/style.css">
 <style>
-  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; background: #0F172A; position: relative; overflow: hidden; }
+  body { margin: 0; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
   
-  /* Abstract background pattern */
-  .bg-pattern { position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; z-index: 0; }
+  .split-left { flex: 1; background: #0F172A; color: white; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .split-right { flex: 1; background: white; display: flex; align-items: center; justify-content: center; padding: 40px; }
   
-  .auth-container { position: relative; z-index: 10; width: 100%; max-width: 480px; padding: 48px; background: white; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+  /* Abstract background pattern for left side */
+  .bg-pattern { position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; }
   
-  .success-icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: #ECFDF5; border-radius: 50%; margin: 0 auto 24px; }
+  .auth-container { width: 100%; max-width: 440px; }
+  .auth-header { margin-bottom: 40px; }
+  .auth-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 36px; margin-bottom: 12px; color: #111827; letter-spacing: -0.02em; font-weight: 700; }
   
-  .auth-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; margin-bottom: 8px; color: #111827; letter-spacing: -0.02em; font-weight: 700; }
-  .auth-header p { color: #6B7280; font-size: 16px; line-height: 1.5; margin: 0; }
+  .success-icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #D1FAE5; margin-bottom: 24px; }
   
-  .loader { margin: 32px auto; border: 3px solid #F3F4F6; border-top: 3px solid #2563EB; border-radius: 50%; width: 36px; height: 36px; animation: spin 1s linear infinite; }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .license-box { background: white; border: 1px solid #E5E7EB; border-radius: 12px; padding: 32px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+  .license-label { font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
   
-  #credentialsBox { display: none; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; text-align: left; margin-top: 32px; }
-  .credentials-label { font-size: 12px; font-weight: 700; color: #64748B; margin-bottom: 8px; text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
+  .key-input { width: 100%; font-family: 'Space Grotesk', monospace; font-size: 22px; font-weight: 600; text-align: center; padding: 16px; border: 2px dashed #D1D5DB; border-radius: 8px; background: #F9FAFB; color: #111827; outline: none; transition: all 0.2s; margin-bottom: 24px; letter-spacing: 0.05em; }
+  .key-input:focus { border-color: #2563EB; background: white; }
   
-  .key-input { width: 100%; padding: 16px; border: 1px solid #CBD5E1; border-radius: 8px; font-family: 'Space Grotesk', monospace; font-size: 18px; font-weight: 600; background: white; text-align: center; color: #0F172A; margin-bottom: 16px; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
-  .key-input:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-  
-  #copyBtn { width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  #copyBtn { width: 100%; padding: 16px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
   #copyBtn:hover { background: #1D4ED8; }
   #copyBtn.copied { background: #10B981; }
   
-  #dashboardLink { display: none; margin-top: 32px; }
-  #dashboardLink a { color: #4B5563; text-decoration: none; font-weight: 500; transition: color 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+  #dashboardLink { display: none; margin-top: 32px; text-align: center; }
+  #dashboardLink a { color: #4B5563; text-decoration: none; font-weight: 500; font-size: 15px; transition: color 0.2s; display: inline-flex; align-items: center; gap: 8px; }
   #dashboardLink a:hover { color: #111827; }
 
-  @media (max-width: 600px) {
-    .auth-container { padding: 32px 24px; margin: 24px; }
+  @media (max-width: 900px) {
+    body { flex-direction: column; }
+    .split-left { display: none; }
+    .split-right { padding: 40px 20px; }
   }
 </style>
 </head>
 <body>
 
-<div class="bg-pattern"></div>
-
-<div class="auth-container" id="mainContainer">
-  
-  <img src="/logo/filelocker-logo-main.svg" alt="FileLocker Logo" height="32" style="margin-bottom: 32px; display: block; margin-left: auto; margin-right: auto;">
-
-  <div class="success-icon">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="split-left">
+  <div class="bg-pattern"></div>
+  <div style="position: relative; z-index: 10;">
+    <a href="/" style="display: inline-block;">
+      <img src="/logo/filelocker-logo-main-dark.svg" alt="FileLocker Logo" height="40" style="display: block;">
+    </a>
   </div>
   
-  <div class="auth-header">
-    <h1>Payment Successful!</h1>
-    <p id="subtitle">We're verifying your payment and generating your License Key...</p>
+  <div style="position: relative; z-index: 10;">
+    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; color: white;">Military-grade encryption. <br>Zero installation.</h2>
+    <p style="font-size: 20px; color: rgba(255,255,255,0.8); line-height: 1.5; max-width: 480px;">Secure your sensitive files directly onto any USB drive before they ever leave your computer.</p>
   </div>
-  
-  <div id="loadingState">
-    <div class="loader"></div>
-  </div>
-  
-  <div id="errorMsg" style="color: #EF4444; display: none; margin-top: 24px; font-weight: 500; padding: 12px; background: #FEF2F2; border-radius: 8px; border: 1px solid #FCA5A5;"></div>
+</div>
 
-  <div id="credentialsBox">
-    <div class="credentials-label">Your Pro License Key</div>
-    <input type="text" id="displayKey" readonly class="key-input" value="••••••••••••••••">
+<div class="split-right">
+  <div class="auth-container">
     
-    <button id="copyBtn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span>Copy License Key</span>
-    </button>
-  </div>
-  
-  <div id="dashboardLink">
-    <a href="dashboard.html">Go to my Dashboard <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="success-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    
+    <div class="auth-header">
+      <h1>Payment Successful!</h1>
+      <p id="subtitle" style="color: #6B7280; font-size: 16px; line-height: 1.5;">We're verifying your payment and generating your License Key...</p>
+    </div>
+    
+    <div class="license-box">
+      <div class="license-label">Your Pro License Key</div>
+      <input type="text" id="licenseKey" class="key-input" readonly value="Generating...">
+      
+      <button id="copyBtn" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M10 8H18C19.1046 8 20 8.89543 20 10V18C20 19.1046 19.1046 20 18 20H10C8.89543 20 8 19.1046 8 18V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Copy License Key</span>
+      </button>
+      
+      <div id="dashboardLink">
+        <a href="dashboard.html">
+          Go to my Dashboard
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('orderId');
   const token = localStorage.getItem('fl_token');
-  const errorMsg = document.getElementById('errorMsg');
-  const credentialsBox = document.getElementById('credentialsBox');
-  const loadingState = document.getElementById('loadingState');
-  const dashboardLink = document.getElementById('dashboardLink');
 
-  if (!token) {
-    errorMsg.textContent = 'You are not logged in. Please log in to view your license key.';
-    errorMsg.style.display = 'block';
-    loadingState.style.display = 'none';
-  } else {
-    let attempts = 0;
-    const maxAttempts = 15;
-    
-    async function fetchLicense() {
-      try {
-        const res = await fetch('https://filelocker-license-server.onrender.com/api/licenses', {
-          headers: { 'Authorization': 'Bearer ' + token }
-        });
-        
-        if (res.ok) {
-          const licenses = await res.json();
-          if (licenses.length > 0) {
-            document.getElementById('displayKey').value = licenses[licenses.length - 1].license_key;
-            document.getElementById('subtitle').textContent = 'Your software is ready to activate.';
-            
-            loadingState.style.display = 'none';
-            credentialsBox.style.display = 'block';
-            dashboardLink.style.display = 'block';
-            return;
-          }
-        }
-      } catch (err) {
-        console.error('Fetch error:', err);
-      }
-      
-      attempts++;
-      if (attempts < maxAttempts) {
-        setTimeout(fetchLicense, 2000);
-      } else {
-        loadingState.style.display = 'none';
-        errorMsg.textContent = 'Payment takes a little longer to verify. Please check your Dashboard in a minute.';
-        errorMsg.style.display = 'block';
-        dashboardLink.style.display = 'block';
-      }
-    }
-    
-    fetchLicense();
+  const copyBtn = document.getElementById('copyBtn');
+  const keyInput = document.getElementById('licenseKey');
+  const subtitle = document.getElementById('subtitle');
+  const dashboardLink = document.getElementById('dashboardLink');
+  
+  if (token) {
+    dashboardLink.style.display = 'block';
   }
 
-  document.getElementById('copyBtn').addEventListener('click', () => {
-    const key = document.getElementById('displayKey').value;
-    navigator.clipboard.writeText(key);
-    
-    const btn = document.getElementById('copyBtn');
-    btn.classList.add('copied');
-    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17L4 12"/></svg> <span>Copied!</span>';
-    
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span>Copy License Key</span>';
-    }, 2000);
-  });
+  async function checkLicense(retries = 0) {
+    if (!orderId) {
+      subtitle.textContent = "No order ID found.";
+      keyInput.value = "ERROR";
+      return;
+    }
+    try {
+      const res = await fetch(`https://filelocker-license-server.onrender.com/api/order-license?orderId=${orderId}`);
+      if (res.ok) {
+        const data = await res.json();
+        keyInput.value = data.licenseKey;
+        subtitle.textContent = "Your software is ready to activate.";
+        copyBtn.disabled = false;
+        
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(data.licenseKey);
+          copyBtn.classList.add('copied');
+          copyBtn.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Copied to Clipboard!</span>
+          `;
+          setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = `
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M10 8H18C19.1046 8 20 8.89543 20 10V18C20 19.1046 19.1046 20 18 20H10C8.89543 20 8 19.1046 8 18V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Copy License Key</span>
+            `;
+          }, 3000);
+        });
+      } else {
+        if (retries < 15) {
+          setTimeout(() => checkLicense(retries + 1), 2000);
+        } else {
+          subtitle.textContent = "Your payment is taking longer than usual to verify. Please check your dashboard in a few minutes.";
+          keyInput.value = "PENDING";
+        }
+      }
+    } catch (err) {
+      if (retries < 15) {
+        setTimeout(() => checkLicense(retries + 1), 2000);
+      } else {
+        subtitle.textContent = "Network error. Please try refreshing the page.";
+        keyInput.value = "ERROR";
+      }
+    }
+  }
+
+  checkLicense();
 </script>
 </body>
 </html>
