@@ -25,7 +25,7 @@
   .license-box { background: white; border: 1px solid #E5E7EB; border-radius: 12px; padding: 32px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
   .license-label { font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
   
-  .key-input { width: 100%; font-family: 'Space Grotesk', monospace; font-size: 22px; font-weight: 600; text-align: center; padding: 16px; border: 2px dashed #D1D5DB; border-radius: 8px; background: #F9FAFB; color: #111827; outline: none; transition: all 0.2s; margin-bottom: 24px; letter-spacing: 0.05em; }
+  .key-input { width: 100%; font-family: 'Space Grotesk', monospace; font-size: 16px; font-weight: 600; text-align: center; padding: 16px; border: 2px dashed #D1D5DB; border-radius: 8px; background: #F9FAFB; color: #111827; outline: none; transition: all 0.2s; margin-bottom: 24px; letter-spacing: 0.05em; }
   .key-input:focus { border-color: #2563EB; background: white; }
   
   #copyBtn { width: 100%; padding: 16px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -106,41 +106,48 @@
   }
 
   async function checkLicense(retries = 0) {
-    if (!orderId) {
-      subtitle.textContent = "No order ID found.";
+    if (!token) {
+      subtitle.textContent = "You are not logged in.";
       keyInput.value = "ERROR";
       return;
     }
     try {
-      const res = await fetch(`https://filelocker-license-server.onrender.com/api/order-license?orderId=${orderId}`);
+      const res = await fetch(`https://filelocker-license-server.onrender.com/api/licenses`, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
       if (res.ok) {
-        const data = await res.json();
-        keyInput.value = data.licenseKey;
-        subtitle.textContent = "Your software is ready to activate.";
-        copyBtn.disabled = false;
-        
-        copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText(data.licenseKey);
-          copyBtn.classList.add('copied');
-          copyBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Copied to Clipboard!</span>
-          `;
-          setTimeout(() => {
-            copyBtn.classList.remove('copied');
+        const licenses = await res.json();
+        if (licenses.length > 0) {
+          const data = licenses[licenses.length - 1].license_key;
+          keyInput.value = data;
+          subtitle.textContent = "Your software is ready to activate.";
+          copyBtn.disabled = false;
+          
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(data);
+            copyBtn.classList.add('copied');
             copyBtn.innerHTML = `
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M10 8H18C19.1046 8 20 8.89543 20 10V18C20 19.1046 19.1046 20 18 20H10C8.89543 20 8 19.1046 8 18V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Copy License Key</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Copied to Clipboard!</span>
             `;
-          }, 3000);
-        });
-      } else {
-        if (retries < 15) {
-          setTimeout(() => checkLicense(retries + 1), 2000);
-        } else {
-          subtitle.textContent = "Your payment is taking longer than usual to verify. Please check your dashboard in a few minutes.";
-          keyInput.value = "PENDING";
+            setTimeout(() => {
+              copyBtn.classList.remove('copied');
+              copyBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M10 8H18C19.1046 8 20 8.89543 20 10V18C20 19.1046 19.1046 20 18 20H10C8.89543 20 8 19.1046 8 18V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Copy License Key</span>
+              `;
+            }, 3000);
+          });
+          return;
         }
+      }
+      
+      // If no license found yet, retry
+      if (retries < 15) {
+        setTimeout(() => checkLicense(retries + 1), 2000);
+      } else {
+        subtitle.textContent = "Your payment is taking longer than usual to verify. Please check your dashboard in a few minutes.";
+        keyInput.value = "PENDING";
       }
     } catch (err) {
       if (retries < 15) {
