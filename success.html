@@ -25,72 +25,113 @@
 </head>
 <body style="background: #F9FAFB; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
 
-<div class="auth-container">
+<div class="auth-container" id="mainContainer">
   <div class="celebration">🎉</div>
   <div class="auth-header">
     <h1>Payment Successful!</h1>
-    <p style="color: #6B7280; font-size: 15px;">Your FileLocker purchase is complete.<br>Please set a password for your account below.</p>
+    <p style="color: #6B7280; font-size: 15px;" id="subtitle">Click below to instantly generate your License Key.</p>
   </div>
   
   <div id="errorMsg"></div>
-  <div id="successMsg"></div>
+  
+  <button id="generateBtn" style="width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s;">
+    Generate My License Key
+  </button>
 
-  <form class="auth-form" id="claimForm">
-    <div class="form-group">
-      <label for="password">Create a Password</label>
-      <input type="password" id="password" required placeholder="••••••••">
+  <div id="credentialsBox" style="display: none; background: #F3F4F6; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px; text-align: left; margin-top: 20px;">
+    <p style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 4px;">YOUR LICENSE KEY</p>
+    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+      <input type="text" id="displayKey" readonly style="flex: 1; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: monospace; font-size: 14px; background: white;">
     </div>
-    <button type="submit">Activate Account</button>
-  </form>
+    
+    <p style="font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 4px;">YOUR AUTO-GENERATED DASHBOARD PASSWORD</p>
+    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+      <input type="text" id="displayPass" readonly style="flex: 1; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: monospace; font-size: 14px; background: white;">
+    </div>
+    <p style="font-size: 12px; color: #6B7280; margin-bottom: 16px;">We created an account so you can manage your key. Save this password!</p>
 
+    <button id="copyBtn" style="width: 100%; padding: 10px; background: #10B981; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer;">
+      Copy Credentials
+    </button>
+  </div>
+  
+  <div id="dashboardLink" style="display: none; text-align: center; margin-top: 20px;">
+    <a href="dashboard.html" style="color: #2563EB; text-decoration: none; font-weight: 500;">Go to my Dashboard →</a>
+  </div>
 </div>
 
 <script>
-  // Get the Lemon Squeezy order_id from the URL
   const urlParams = new URLSearchParams(window.location.search);
   const orderId = urlParams.get('order_id') || urlParams.get('orderId');
 
+  const generateBtn = document.getElementById('generateBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const credentialsBox = document.getElementById('credentialsBox');
+  const dashboardLink = document.getElementById('dashboardLink');
+
   if (!orderId) {
-    const errorMsg = document.getElementById('errorMsg');
     errorMsg.textContent = 'Invalid link. Missing order ID.';
     errorMsg.style.display = 'block';
-    document.getElementById('claimForm').style.display = 'none';
+    generateBtn.style.display = 'none';
   }
 
-  document.getElementById('claimForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const password = document.getElementById('password').value;
-    const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
-    
+  // Generate a strong random password
+  function generatePassword() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*';
+    let pass = 'FL-';
+    for (let i = 0; i < 12; i++) {
+      pass += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return pass;
+  }
+
+  generateBtn.addEventListener('click', async () => {
+    generateBtn.textContent = 'Generating...';
+    generateBtn.disabled = true;
     errorMsg.style.display = 'none';
+    
+    const autoPassword = generatePassword();
     
     try {
       const res = await fetch('https://filelocker-license-server.onrender.com/api/claim-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId, password })
+        body: JSON.stringify({ orderId, password: autoPassword })
       });
       const data = await res.json();
       
       if (res.ok) {
-        // Log them in immediately with the returned token
+        // Log them in immediately
         localStorage.setItem('fl_token', data.token);
-        successMsg.textContent = 'Account activated! Redirecting to Dashboard...';
-        successMsg.style.display = 'block';
-        document.getElementById('claimForm').style.display = 'none';
         
-        setTimeout(() => {
-          window.location.href = 'dashboard.html';
-        }, 1500);
+        generateBtn.style.display = 'none';
+        document.getElementById('subtitle').textContent = 'Please save your credentials below:';
+        
+        // Show credentials
+        document.getElementById('displayKey').value = data.licenseKey;
+        document.getElementById('displayPass').value = autoPassword;
+        credentialsBox.style.display = 'block';
+        dashboardLink.style.display = 'block';
       } else {
-        errorMsg.textContent = data.error || 'Failed to activate account. Please contact support.';
+        errorMsg.textContent = data.error || 'Failed to generate key. Please contact support.';
         errorMsg.style.display = 'block';
+        generateBtn.textContent = 'Try Again';
+        generateBtn.disabled = false;
       }
     } catch (err) {
       errorMsg.textContent = 'Network error. Is the server running?';
       errorMsg.style.display = 'block';
+      generateBtn.textContent = 'Try Again';
+      generateBtn.disabled = false;
     }
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const key = document.getElementById('displayKey').value;
+    const pass = document.getElementById('displayPass').value;
+    navigator.clipboard.writeText(`FileLocker License Key: ${key}\nDashboard Password: ${pass}`);
+    document.getElementById('copyBtn').textContent = 'Copied!';
+    setTimeout(() => document.getElementById('copyBtn').textContent = 'Copy Credentials', 2000);
   });
 </script>
 </body>
