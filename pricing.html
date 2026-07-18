@@ -125,7 +125,7 @@
         <div class="tier-name">FileLocker</div>
         <div class="price-amount"><del>$59</del>$29</div>
         <div class="price-note" style="font-weight: 500; color: #4B5563; font-size: 16px; margin-top: 4px;">one-time</div>
-        <a href="register.html" class="btn btn-primary">Get FileLocker</a>
+        <a href="register.html" class="btn btn-primary" id="pricingGetBtn">Get FileLocker</a>
         <div class="price-note">Secure lifetime access.<br>No monthly fees.</div>
       </div>
       <div class="pricing-right">
@@ -213,5 +213,54 @@
 {{> footer }}
 
 <script type="module" src="/src/js/main.js"></script>
+<script>
+  function parseJwt(token) {
+    try { return JSON.parse(atob(token.split('.')[1])); } catch (e) { return null; }
+  }
+  document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('fl_token');
+    if (token) {
+      const userData = parseJwt(token);
+      const btn = document.getElementById('pricingGetBtn');
+      if (!btn || !userData) return;
+      
+      btn.textContent = 'Checking...';
+      btn.style.pointerEvents = 'none';
+
+      try {
+        const res = await fetch('https://filelocker-license-server.onrender.com/api/licenses', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (res.ok) {
+          const licenses = await res.json();
+          if (licenses.length > 0) {
+            btn.textContent = 'Already Purchased';
+            btn.href = 'dashboard.html';
+            btn.style.pointerEvents = 'auto';
+            btn.style.background = '#10B981';
+          } else {
+            btn.textContent = 'Buy FileLocker';
+            btn.href = '#';
+            btn.style.pointerEvents = 'auto';
+            btn.onclick = (e) => {
+              e.preventDefault();
+              const checkoutUrl = new URL('https://filelocker.lemonsqueezy.com/checkout/buy/b303a8ae-4fc6-4f16-83ed-0c1159e02b8a');
+              checkoutUrl.searchParams.set('checkout[email]', userData.email);
+              checkoutUrl.searchParams.set('checkout[custom][user_id]', userData.id);
+              window.location.href = checkoutUrl.toString();
+            };
+          }
+        } else {
+          localStorage.removeItem('fl_token');
+          btn.textContent = 'Get FileLocker';
+          btn.style.pointerEvents = 'auto';
+        }
+      } catch (e) {
+        btn.textContent = 'Get FileLocker';
+        btn.style.pointerEvents = 'auto';
+      }
+    }
+  });
+</script>
 </body>
 </html>
