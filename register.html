@@ -6,6 +6,7 @@
 <title>Create Account — FileLocker</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <link rel="stylesheet" href="/src/css/style.css">
 <style>
   body { margin: 0; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
@@ -63,6 +64,29 @@
     
     <div id="errorMsg"></div>
 
+    <!-- Google Sign-In -->
+    <div id="g_id_onload"
+         data-client_id="613015066802-e22l5s2va9man9d4hcsrrg44od6ks044.apps.googleusercontent.com"
+         data-context="signup"
+         data-ux_mode="popup"
+         data-callback="handleGoogleSignIn"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="signup_with"
+         data-size="large"
+         data-logo_alignment="left"
+         style="margin-bottom: 20px; display: flex; justify-content: center;">
+    </div>
+    
+    <div style="text-align: center; margin: 20px 0; color: #9CA3AF; font-size: 14px; position: relative;">
+      <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">Or continue with email</span>
+      <div style="position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #E5E7EB; z-index: 0;"></div>
+    </div>
+
     <form class="auth-form" id="registerForm">
       <div class="form-group">
         <label for="email">Email Address</label>
@@ -82,7 +106,7 @@
 </div>
 
 <script>
-  if (localStorage.getItem('fl_token')) window.location.href = 'dashboard.html';
+  if (localStorage.getItem('fl_token')) window.location.href = '/';
   
   const isBuy = new URLSearchParams(window.location.search).get('buy') === 'true';
   if (!isBuy) document.getElementById('submitBtn').textContent = 'Create Account';
@@ -125,7 +149,7 @@
           checkoutUrl.searchParams.set('checkout[custom][user_id]', data.userId);
           window.location.href = checkoutUrl.toString();
         } else {
-          window.location.href = 'dashboard.html';
+          window.location.href = '/';
         }
       } else {
         showError(data.error || 'Registration failed');
@@ -134,6 +158,44 @@
       showError('Network error. Is the server running?');
     }
   });
+
+  async function handleGoogleSignIn(response) {
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.classList.remove('show');
+    
+    const showError = (msg) => {
+      errorMsg.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>${msg}</span>`;
+      errorMsg.classList.add('show');
+    };
+
+    try {
+      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/google-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: response.credential })
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        localStorage.setItem('fl_token', data.token);
+        
+        if (isBuy) {
+          const jwtPayload = JSON.parse(atob(response.credential.split('.')[1]));
+          const checkoutUrl = new URL('https://filelocker.lemonsqueezy.com/checkout/buy/b303a8ae-4fc6-4f16-83ed-0c1159e02b8a');
+          checkoutUrl.searchParams.set('checkout[email]', jwtPayload.email);
+          checkoutUrl.searchParams.set('checkout[custom][user_id]', data.userId);
+          window.location.href = checkoutUrl.toString();
+        } else {
+          window.location.href = '/';
+        }
+      } else {
+        showError(data.error || 'Google Sign-In failed');
+      }
+    } catch (err) {
+      showError('Network error. Is the server running?');
+    }
+  }
 </script>
 </body>
 </html>

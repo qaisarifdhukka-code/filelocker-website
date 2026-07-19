@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -46,7 +47,7 @@ function handlebarsPartials() {
 }
 
 export default defineConfig({
-  plugins: [handlebarsPartials()],
+  plugins: [basicSsl(), handlebarsPartials()],
   build: {
     rollupOptions: {
       input: {
