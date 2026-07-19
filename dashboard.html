@@ -77,7 +77,9 @@
       });
       
       if (res.status === 401 || res.status === 403) {
-        alert("Debug: Authentication failed. Server returned " + res.status + ".\nToken starts with: " + (token ? token.substring(0, 15) : "null"));
+        let details = "None";
+        try { const errData = await res.json(); details = errData.details || errData.error || "None"; } catch(e) {}
+        alert("Debug: Authentication failed. Server returned " + res.status + ".\nDetails: " + details + "\nToken starts with: " + (token ? token.substring(0, 15) : "null"));
         localStorage.removeItem('fl_token');
         window.location.href = 'login.html';
         return;
