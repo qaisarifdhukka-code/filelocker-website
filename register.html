@@ -82,6 +82,9 @@
 </div>
 
 <script>
+  const isBuy = new URLSearchParams(window.location.search).get('buy') === 'true';
+  if (!isBuy) document.getElementById('submitBtn').textContent = 'Create Account';
+
   document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -98,7 +101,7 @@
       <span>${msg}</span>`;
       errorMsg.classList.add('show');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Continue to Payment';
+      submitBtn.textContent = isBuy ? 'Continue to Payment' : 'Create Account';
     };
 
     try {
@@ -113,12 +116,15 @@
         // Save auth token
         localStorage.setItem('fl_token', data.token);
         
-        // Redirect to Lemon Squeezy with user_id and email prefilled
-        const checkoutUrl = new URL('https://filelocker.lemonsqueezy.com/checkout/buy/b303a8ae-4fc6-4f16-83ed-0c1159e02b8a');
-        checkoutUrl.searchParams.set('checkout[email]', email);
-        checkoutUrl.searchParams.set('checkout[custom][user_id]', data.userId);
-        
-        window.location.href = checkoutUrl.toString();
+        if (isBuy) {
+          // Redirect to Lemon Squeezy with user_id and email prefilled
+          const checkoutUrl = new URL('https://filelocker.lemonsqueezy.com/checkout/buy/b303a8ae-4fc6-4f16-83ed-0c1159e02b8a');
+          checkoutUrl.searchParams.set('checkout[email]', email);
+          checkoutUrl.searchParams.set('checkout[custom][user_id]', data.userId);
+          window.location.href = checkoutUrl.toString();
+        } else {
+          window.location.href = 'dashboard.html';
+        }
       } else {
         showError(data.error || 'Registration failed');
       }
