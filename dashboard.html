@@ -72,7 +72,7 @@
 
   async function loadLicenses() {
     try {
-      const res = await fetch('https://filelocker-license-server.onrender.com/api/licenses', {
+      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/licenses', {
         headers: { 'Authorization': 'Bearer ' + token }
       });
       
@@ -132,7 +132,7 @@
     if (!confirm('Are you sure you want to unlink this machine? It will no longer be able to use FileLocker until re-activated.')) return;
     
     try {
-      const res = await fetch('https://filelocker-license-server.onrender.com/api/unlink', {
+      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/unlink', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
