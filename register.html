@@ -82,6 +82,8 @@
 </div>
 
 <script>
+  if (localStorage.getItem('fl_token')) window.location.href = 'dashboard.html';
+  
   const isBuy = new URLSearchParams(window.location.search).get('buy') === 'true';
   if (!isBuy) document.getElementById('submitBtn').textContent = 'Create Account';
 

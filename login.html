@@ -82,6 +82,8 @@
 </div>
 
 <script>
+  if (localStorage.getItem('fl_token')) window.location.href = 'dashboard.html';
+  
   document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
