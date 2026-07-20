@@ -210,7 +210,8 @@
   const msalConfig = {
     auth: {
       clientId: '765e50fe-6d51-4e76-9f67-6c5b0cc0539c',
-      authority: 'https://login.microsoftonline.com/common'
+      authority: 'https://login.microsoftonline.com/common',
+      redirectUri: window.location.origin
     }
   };
   const msalInstance = new msal.PublicClientApplication(msalConfig);
