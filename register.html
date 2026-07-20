@@ -10,6 +10,7 @@
 <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
 <link rel="stylesheet" href="/src/css/style.css">
 <style>
+  * { box-sizing: border-box; }
   body { margin: 0; min-height: 100vh; display: flex; font-family: 'Inter', sans-serif; }
   
   .split-left { flex: 1; background: #0F172A; color: white; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
@@ -23,9 +24,9 @@
   .auth-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 32px; margin-bottom: 8px; color: #111827; letter-spacing: -0.02em; font-weight: 700; }
   .auth-form .form-group { margin-bottom: 20px; }
   .auth-form label { display: block; font-size: 13px; font-weight: 600; color: #4B5563; margin-bottom: 8px; }
-  .auth-form input { width: 100%; padding: 14px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 15px; outline: none; transition: all 0.2s; }
+  .auth-form input { width: 100%; padding: 14px 16px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 15px; outline: none; transition: all 0.2s; box-sizing: border-box; }
   .auth-form input:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-  .auth-form button { width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+  .auth-form button { width: 100%; padding: 14px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: background 0.2s; box-sizing: border-box; }
   .auth-form button:hover:not(:disabled) { background: #1D4ED8; }
   .auth-form button:disabled { opacity: 0.7; cursor: not-allowed; }
   .auth-footer { margin-top: 24px; font-size: 14px; color: #6B7280; }
@@ -65,7 +66,7 @@
     
     <div id="errorMsg"></div>
 
-    <!-- Google Sign-In -->
+    <!-- Google Sign-In Config -->
     <div id="g_id_onload"
          data-client_id="613015066802-e22l5s2va9man9d4hcsrrg44od6ks044.apps.googleusercontent.com"
          data-context="signup"
@@ -73,20 +74,23 @@
          data-callback="handleGoogleSignIn"
          data-auto_prompt="false">
     </div>
-    <div class="g_id_signin"
-         data-type="standard"
-         data-shape="rectangular"
-         data-theme="outline"
-         data-text="signup_with"
-         data-size="large"
-         data-logo_alignment="left"
-         style="margin-bottom: 20px; display: flex; justify-content: center;">
+
+    <div style="display: flex; flex-direction: row; gap: 12px; justify-content: space-between; width: 100%; margin-bottom: 24px;">
+      <div class="g_id_signin"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="signup"
+           data-size="large"
+           data-logo_alignment="center"
+           data-width="194">
+      </div>
+      
+      <button type="button" id="msSignInBtn" style="width: 194px; display: flex; align-items: center; justify-content: center; gap: 8px; background: white; color: #3c4043; border: 1px solid #dadce0; border-radius: 4px; padding: 0 12px; height: 40px; font-weight: 500; font-size: 14px; font-family: 'Roboto', 'Inter', sans-serif; cursor: pointer; transition: background 0.2s; box-sizing: border-box;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 21 21"><path fill="#f25022" d="M1 1h9v9H1z"/><path fill="#00a4ef" d="M1 11h9v9H1z"/><path fill="#7fba00" d="M11 1h9v9h-9z"/><path fill="#ffb900" d="M11 11h9v9h-9z"/></svg>
+        Microsoft
+      </button>
     </div>
-    
-    <button type="button" id="msSignInBtn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; background: white; color: #3c4043; border: 1px solid #dadce0; border-radius: 4px; padding: 10px; font-weight: 500; font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer; margin-bottom: 20px; transition: background 0.2s;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21"><path fill="#f25022" d="M1 1h9v9H1z"/><path fill="#00a4ef" d="M1 11h9v9H1z"/><path fill="#7fba00" d="M11 1h9v9h-9z"/><path fill="#ffb900" d="M11 11h9v9h-9z"/></svg>
-      Sign in with Microsoft
-    </button>
     
     <div style="text-align: center; margin: 20px 0; color: #9CA3AF; font-size: 14px; position: relative;">
       <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">Or continue with email</span>
