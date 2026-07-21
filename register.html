@@ -92,22 +92,7 @@
       </button>
     </div>
     
-    <div style="text-align: center; margin: 20px 0; color: #9CA3AF; font-size: 14px; position: relative;">
-      <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">Or continue with email</span>
-      <div style="position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #E5E7EB; z-index: 0;"></div>
-    </div>
 
-    <form class="auth-form" id="registerForm">
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" required placeholder="you@company.com">
-      </div>
-      <div class="form-group">
-        <label for="password">Create Password</label>
-        <input type="password" id="password" required placeholder="••••••••" minlength="6">
-      </div>
-      <button type="submit" id="submitBtn">Continue to Payment</button>
-    </form>
 
     <div class="auth-footer">
       Already have an account? <a href="login.html">Sign in</a>
@@ -119,55 +104,7 @@
   if (localStorage.getItem('fl_token')) window.location.href = '/';
   
   const isBuy = new URLSearchParams(window.location.search).get('buy') === 'true';
-  if (!isBuy) document.getElementById('submitBtn').textContent = 'Create Account';
 
-  document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorMsg = document.getElementById('errorMsg');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    errorMsg.classList.remove('show');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Creating account...';
-    
-    const showError = (msg) => {
-      errorMsg.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>${msg}</span>`;
-      errorMsg.classList.add('show');
-      submitBtn.disabled = false;
-      submitBtn.textContent = isBuy ? 'Continue to Payment' : 'Create Account';
-    };
-
-    try {
-      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
-      
-      if (res.ok) {
-        // Save auth token
-        localStorage.setItem('fl_token', data.token);
-        
-        if (isBuy) {
-          // Redirect to Lemon Squeezy with user_id and email prefilled
-          const checkoutUrl = new URL('https://filelocker.lemonsqueezy.com/checkout/buy/b303a8ae-4fc6-4f16-83ed-0c1159e02b8a');
-          checkoutUrl.searchParams.set('checkout[email]', email);
-          checkoutUrl.searchParams.set('checkout[custom][user_id]', data.userId);
-          window.location.href = checkoutUrl.toString();
-        } else {
-          window.location.href = '/';
-        }
-      } else {
-        showError(data.error || 'Registration failed');
-      }
-    } catch (err) {
-      showError('Network error. Is the server running?');
-    }
-  });
 
   async function handleGoogleSignIn(response) {
     const errorMsg = document.getElementById('errorMsg');

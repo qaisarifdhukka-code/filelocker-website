@@ -92,22 +92,7 @@
       </button>
     </div>
     
-    <div style="text-align: center; margin: 20px 0; color: #9CA3AF; font-size: 14px; position: relative;">
-      <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">Or continue with email</span>
-      <div style="position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #E5E7EB; z-index: 0;"></div>
-    </div>
 
-    <form class="auth-form" id="loginForm">
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" required placeholder="you@company.com">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required placeholder="••••••••">
-      </div>
-      <button type="submit" id="submitBtn">Sign In</button>
-    </form>
 
     <div class="auth-footer">
       Don't have an account? <a href="register.html">Create one</a>
@@ -118,43 +103,7 @@
 <script>
   if (localStorage.getItem('fl_token')) window.location.href = '/';
   
-  document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorMsg = document.getElementById('errorMsg');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Signing in...';
-    errorMsg.classList.remove('show');
-    
-    const showError = (msg) => {
-      errorMsg.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>${msg}</span>`;
-      errorMsg.classList.add('show');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Sign In';
-    };
 
-    try {
-      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
-      
-      if (res.ok) {
-        localStorage.setItem('fl_token', data.token);
-        window.location.href = '/';
-      } else {
-        showError(data.error || 'Login failed');
-      }
-    } catch (err) {
-      showError('Network error. Is the server running?');
-    }
-  });
 
   async function handleGoogleSignIn(response) {
     const errorMsg = document.getElementById('errorMsg');
