@@ -4,65 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — FileLocker</title>
-<link rel="icon" type="image/png" href="/Favicon.png">
-<meta name="description" content="FileLocker's terms of service: license grant, permitted and prohibited use, refunds, and liability.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/css/style.css">
+<style>
+  .legal-content {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+    color: #374151;
+    line-height: 1.7;
+  }
+  .legal-content h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    color: #111827;
+    margin-bottom: 16px;
+  }
+  .legal-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    color: #111827;
+    margin-top: 48px;
+    margin-bottom: 16px;
+  }
+  .legal-content p {
+    margin-bottom: 16px;
+  }
+  .last-updated {
+    color: #6B7280;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+</style>
 </head>
 <body>
 
 {{> header }}
 
-<section class="page-hero">
-  <div class="wrap">
-    <div class="eyebrow">Legal</div>
-    <h1>Terms of Service</h1>
-  </div>
-</section>
+<main class="legal-content">
+  <h1>Terms of Service</h1>
+  <div class="last-updated">Last Updated: July 2026</div>
 
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="legal-content">
-      <div class="legal-updated">Last updated: July 2026</div>
+  <h2>1. Agreement to Terms</h2>
+  <p>By purchasing, downloading, or using FileLocker, you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the software.</p>
 
-      <h2>License grant</h2>
-      <p>Upon purchase, FileLocker grants you a non-exclusive, non-transferable license to install and use the FileLocker desktop application on devices you own or control, for the purpose described in our product documentation.</p>
+  <h2>2. License Grant</h2>
+  <p>Upon purchasing a license key, FileLocker grants you a non-exclusive, non-transferable license to use the FileLocker desktop software on the authorized number of devices associated with your license key. The software is licensed, not sold.</p>
 
-      <h2>Permitted use</h2>
-      <p>You may use FileLocker to encrypt files you have the legal right to possess and distribute, for delivery to your own clients, colleagues, or other intended recipients.</p>
+  <h2>3. User Responsibilities</h2>
+  <p>FileLocker provides an offline encryption tool. You are solely responsible for remembering the passwords you set for your encrypted vaults. <strong>FileLocker cannot recover lost passwords or decrypt files if a password is forgotten, as we do not have access to your data.</strong></p>
 
-      <h2>Prohibited use</h2>
-      <ul>
-        <li>Using FileLocker to encrypt or distribute unlawful content</li>
-        <li>Reverse engineering, decompiling, or attempting to extract the source code of the application</li>
-        <li>Reselling, sublicensing, or redistributing FileLocker without authorization</li>
-        <li>Using FileLocker to circumvent any applicable law, including data protection regulations</li>
-      </ul>
+  <h2>4. Limitation of Liability</h2>
+  <p>In no event shall FileLocker be liable for any indirect, incidental, special, or consequential damages arising out of the use or inability to use the software, including but not limited to loss of data, loss of business, or loss of profits.</p>
 
-      <h2>Refund policy</h2>
-      <p>If FileLocker does not function as described on a supported system, contact support within 14 days of purchase for a refund review.</p>
+  <h2>5. Refund Policy</h2>
+  <p>We offer a standard 14-day money-back guarantee if the software does not perform as described on our website. Please contact support to initiate a refund.</p>
 
-      <h2>Limitation of liability</h2>
-      <p>FileLocker is provided "as is." Because there is no password recovery mechanism by design, we are not liable for data rendered inaccessible due to a lost or forgotten password. To the fullest extent permitted by law, we disclaim liability for indirect, incidental, or consequential damages arising from use of the software.</p>
-
-      <h2>Intellectual property</h2>
-      <p>FileLocker, its logo, and its underlying software remain the intellectual property of their owner. This license grants you the right to use the software — not ownership of it.</p>
-
-      <h2>Governing law</h2>
-      <p>These terms are governed by the laws of the jurisdiction in which FileLocker is legally registered, without regard to conflict-of-law principles.</p>
-
-      <h2>Contact</h2>
-      <p>Questions about these terms can be directed to us via the <a href="/contact.html" style="color:var(--navy); font-weight:600;">Contact page</a>.</p>
-
-      <p class="form-note" style="margin-top:32px;">This document is a starting template, not legal advice. Have it reviewed by a qualified attorney before publishing it as your final, binding terms of service.</p>
-    </div>
-  </div>
-</section>
+  <h2>6. Contact Us</h2>
+  <p>If you have questions regarding these terms, please contact us at <strong>support@filelocker.com</strong>.</p>
+</main>
 
 {{> footer }}
 
-<script type="module" src="/src/js/main.js"></script>
 </body>
 </html>

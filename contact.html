@@ -3,83 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact & Support — FileLocker</title>
-<link rel="icon" type="image/png" href="/Favicon.png">
-<meta name="description" content="Get in touch with FileLocker for general questions, technical support, or enterprise licensing.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Contact Us — FileLocker</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/css/style.css">
+<style>
+  .contact-layout {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+    color: #374151;
+    line-height: 1.7;
+    text-align: center;
+    min-height: 50vh;
+  }
+  .contact-layout h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    color: #111827;
+    margin-bottom: 24px;
+  }
+  .contact-layout p {
+    font-size: 18px;
+    color: #4B5563;
+    margin-bottom: 40px;
+  }
+  .contact-box {
+    background: white;
+    border: 1px solid #EAEAEA;
+    border-radius: 12px;
+    padding: 48px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  }
+  .email-link {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2563EB;
+    text-decoration: none;
+    padding: 16px 32px;
+    background: #EFF6FF;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .email-link:hover {
+    background: #DBEAFE;
+  }
+</style>
 </head>
 <body>
 
 {{> header }}
 
-<section class="page-hero">
-  <div class="wrap">
-    <div class="eyebrow">Contact &amp; Support</div>
-    <h1>We respond within 24 hours on business days.</h1>
-    <p>General questions, technical support, or enterprise licensing — pick whichever fits.</p>
+<main class="contact-layout">
+  <h1>Contact Support</h1>
+  <p>Need help with your license, or have a question about how FileLocker works? Our team is here to assist you.</p>
+
+  <div class="contact-box">
+    <h3 style="margin-bottom: 16px; font-family: 'Space Grotesk', sans-serif; font-size: 20px;">Email Us Directly</h3>
+    <p style="font-size: 15px; margin-bottom: 32px;">We typically respond to all support inquiries within 24 business hours.</p>
+    <a href="mailto:support@filelocker.com" class="email-link">support@filelocker.com</a>
   </div>
-</section>
-
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-options">
-        <div class="contact-option">
-          <h4>General enquiry</h4>
-          <p>Questions before you buy, or anything else that doesn't fit the categories below.</p>
-        </div>
-        <div class="contact-option">
-          <h4>Technical support</h4>
-          <p>Installation issues, unlock problems, or anything not behaving as expected.</p>
-        </div>
-        <div class="contact-option">
-          <h4>Enterprise &amp; team licensing</h4>
-          <p>Need 5 or more licenses? Tell us your team size and we'll follow up with volume pricing.</p>
-        </div>
-        <p class="form-note">Before reaching out, check whether your question is already answered on the <a href="/faq.html" style="color:var(--navy); font-weight:600;">FAQ page</a>.</p>
-      </div>
-
-      <form id="contactForm">
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-field">
-          <label for="subject">Subject</label>
-          <select id="subject" name="subject">
-            <option>General enquiry</option>
-            <option>Technical support</option>
-            <option>Enterprise &amp; team licensing</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message</button>
-        <p class="form-note" id="formStatus">We respond within 24 hours on business days.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById('formStatus').textContent = "Thanks — your message has been noted. We'll get back to you within 24 hours on business days.";
-    this.reset();
-  });
-</script>
+</main>
 
 {{> footer }}
 
-<script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
