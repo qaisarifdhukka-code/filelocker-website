@@ -1,232 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile — FileLocker</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/src/css/style.css">
-<style>
-  body { background: #F9FAFB; }
-  .profile-layout { max-width: 1100px; margin: 40px auto; padding: 0 20px; min-height: 60vh; display: flex; gap: 40px; align-items: flex-start; }
-  
-  /* Sidebar */
-  .profile-sidebar { flex: 0 0 240px; }
-  .profile-sidebar h2 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 24px; color: #111827; }
-  .sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
-  .sidebar-tab { padding: 12px 16px; border-radius: 8px; cursor: pointer; color: #4B5563; font-weight: 500; transition: all 0.2s; font-size: 15px; border: none; background: transparent; text-align: left; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 12px; }
-  .sidebar-tab:hover { background: #E5E7EB; color: #111827; }
-  .sidebar-tab.active { background: #2563EB; color: white; }
-  
-  /* Content Area */
-  .profile-content { flex: 1; background: white; border: 1px solid #EAEAEA; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.02); min-height: 400px; }
-  .profile-pane { display: none; padding: 40px; }
-  .profile-pane.active { display: block; }
-  .pane-header { margin-bottom: 32px; border-bottom: 1px solid #EAEAEA; padding-bottom: 24px; }
-  .pane-header h3 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; color: #111827; margin-bottom: 8px; }
-  .pane-header p { color: #6B7280; margin: 0; font-size: 15px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — FileLocker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/style.css">
+  <style>
+    body {
+      background: #F9FAFB;
+    }
 
-  /* Tab 1: Overview */
-  .overview-card { border: 1px solid #EAEAEA; border-radius: 8px; padding: 24px; display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
-  .overview-avatar { width: 64px; height: 64px; border-radius: 50%; background: #E7EEFF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
-  
-  /* Tab 2: Licenses */
-  .license-card { background: white; border: 1px solid #EAEAEA; border-radius: 8px; padding: 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .license-info h4 { font-family: 'Space Grotesk', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; margin-bottom: 8px; }
-  .license-key { font-family: 'Space Grotesk', monospace; font-size: 24px; color: #111827; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; }
-  .status-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-  .status-active { background: #DCFCE7; color: #166534; }
-  .status-unused { background: #F3F4F6; color: #4B5563; }
-  .action-btn { padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px; cursor: pointer; border: 1px solid #D1D5DB; background: white; color: #374151; transition: all 0.2s; font-family: 'Inter', sans-serif; }
-  .action-btn:hover:not(:disabled) { background: #F9FAFB; border-color: #9CA3AF; }
+    .profile-layout {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      min-height: 60vh;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
 
-  /* Tab 3: Billing */
-  .billing-card { border: 1px solid #EAEAEA; border-radius: 8px; padding: 32px; text-align: center; }
-  .billing-card p { color: #4B5563; margin-bottom: 24px; }
-  
-  /* Tab 4: Downloads */
-  .download-card { border: 1px solid #EAEAEA; border-radius: 8px; padding: 32px; text-align: center; background: #F8FAFC; }
-  .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; background: #2563EB; color: white; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: background 0.2s; font-family: 'Inter', sans-serif; }
-  .download-btn:hover { background: #1D4ED8; }
+    /* Sidebar */
+    .profile-sidebar {
+      flex: 0 0 240px;
+    }
 
-  @media (max-width: 768px) {
-    .profile-layout { flex-direction: column; }
-    .profile-sidebar { flex: none; width: 100%; border-bottom: 1px solid #EAEAEA; padding-bottom: 20px; }
-    .sidebar-nav { flex-direction: row; flex-wrap: wrap; }
-    .profile-content { width: 100%; }
-    .license-card { flex-direction: column; align-items: flex-start; gap: 20px; }
-  }
-</style>
+    .profile-sidebar h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: #111827;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-tab {
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #4B5563;
+      font-weight: 500;
+      transition: all 0.2s;
+      font-size: 15px;
+      border: none;
+      background: transparent;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-tab:hover {
+      background: #E5E7EB;
+      color: #111827;
+    }
+
+    .sidebar-tab.active {
+      background: #2563EB;
+      color: white;
+    }
+
+    /* Content Area */
+    .profile-content {
+      flex: 1;
+      background: white;
+      border: 1px solid #EAEAEA;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+      min-height: 400px;
+    }
+
+    .profile-pane {
+      display: none;
+      padding: 40px;
+    }
+
+    .profile-pane.active {
+      display: block;
+    }
+
+    .pane-header {
+      margin-bottom: 32px;
+      border-bottom: 1px solid #EAEAEA;
+      padding-bottom: 24px;
+    }
+
+    .pane-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .pane-header p {
+      color: #6B7280;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    /* Tab 1: Overview */
+    .overview-card {
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .overview-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #E7EEFF;
+      color: #2563EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Tab 2: Licenses */
+    .license-card {
+      background: white;
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .license-info h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6B7280;
+      margin-bottom: 8px;
+    }
+
+    .license-key {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 24px;
+      color: #111827;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-active {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .status-unused {
+      background: #F3F4F6;
+      color: #4B5563;
+    }
+
+    .action-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      border: 1px solid #D1D5DB;
+      background: white;
+      color: #374151;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      background: #F9FAFB;
+      border-color: #9CA3AF;
+    }
+
+    /* Tab 3: Billing */
+    .billing-card {
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .billing-card p {
+      color: #4B5563;
+      margin-bottom: 24px;
+    }
+
+    /* Tab 4: Downloads */
+    .download-card {
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      background: #F8FAFC;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: #2563EB;
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .download-btn:hover {
+      background: #1D4ED8;
+    }
+
+    @media (max-width: 768px) {
+      .profile-layout {
+        flex-direction: column;
+      }
+
+      .profile-sidebar {
+        flex: none;
+        width: 100%;
+        border-bottom: 1px solid #EAEAEA;
+        padding-bottom: 20px;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .profile-content {
+        width: 100%;
+      }
+
+      .license-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-{{> header }}
+  {{> header }}
 
-<div class="profile-layout">
-  <!-- Sidebar Navigation -->
-  <aside class="profile-sidebar">
-    <h2>Account Portal</h2>
-    <nav class="sidebar-nav">
-      <button class="sidebar-tab active" data-target="pane-overview">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Overview
-      </button>
-      <button class="sidebar-tab" data-target="pane-licenses">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Licenses & Devices
-      </button>
-      <button class="sidebar-tab" data-target="pane-billing">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        Billing & Orders
-      </button>
-      <button class="sidebar-tab" data-target="pane-downloads">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Downloads
-      </button>
-    </nav>
-  </aside>
+  <div class="profile-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="profile-sidebar">
+      <h2>Account Portal</h2>
+      <nav class="sidebar-nav">
+        <button class="sidebar-tab active" data-target="pane-overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Overview
+        </button>
+        <button class="sidebar-tab" data-target="pane-licenses">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          Licenses & Devices
+        </button>
+        <button class="sidebar-tab" data-target="pane-billing">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+          </svg>
+          Billing & Orders
+        </button>
+        <button class="sidebar-tab" data-target="pane-downloads">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Downloads
+        </button>
+      </nav>
+    </aside>
 
-  <!-- Content Area -->
-  <main class="profile-content">
-    
-    <!-- OVERVIEW PANE -->
-    <div class="profile-pane active" id="pane-overview">
-      <div class="pane-header">
-        <h3>Overview</h3>
-        <p>Manage your account settings and preferences.</p>
-      </div>
-      <div class="overview-card">
-        <div class="overview-avatar" id="userInitial">U</div>
-        <div>
-          <h4 style="font-size: 18px; color: #111827; margin-bottom: 4px;">Welcome back,</h4>
-          <p id="userEmail" style="color: #4B5563; font-weight: 500; font-size: 15px;">Loading...</p>
+    <!-- Content Area -->
+    <main class="profile-content">
+
+      <!-- OVERVIEW PANE -->
+      <div class="profile-pane active" id="pane-overview">
+        <div class="pane-header">
+          <h3>Overview</h3>
+          <p>Manage your account settings and preferences.</p>
+        </div>
+        <div class="overview-card">
+          <div class="overview-avatar" id="userInitial">U</div>
+          <div>
+            <h4 style="font-size: 18px; color: #111827; margin-bottom: 4px;">Welcome,</h4>
+            <p id="userEmail" style="color: #4B5563; font-weight: 500; font-size: 15px;">Loading...</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- LICENSES PANE -->
-    <div class="profile-pane" id="pane-licenses">
-      <div class="pane-header">
-        <h3>Licenses & Devices</h3>
-        <p>View your Pro keys and manage active devices.</p>
+      <!-- LICENSES PANE -->
+      <div class="profile-pane" id="pane-licenses">
+        <div class="pane-header">
+          <h3>Licenses & Devices</h3>
+          <p>View your Pro keys and manage active devices.</p>
+        </div>
+        <div id="licenseContainer">
+          <div style="text-align: center; color: #6B7280; padding: 40px;">Loading your licenses...</div>
+        </div>
       </div>
-      <div id="licenseContainer">
-        <div style="text-align: center; color: #6B7280; padding: 40px;">Loading your licenses...</div>
+
+      <!-- BILLING PANE -->
+      <div class="profile-pane" id="pane-billing">
+        <div class="pane-header">
+          <h3>Billing & Orders</h3>
+          <p>Manage your payment methods and view past receipts.</p>
+        </div>
+        <div class="billing-card">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"
+            style="margin: 0 auto 16px;">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+          </svg>
+          <h4 style="font-size: 20px; margin-bottom: 12px;">Customer Portal</h4>
+          <p>FileLocker partners with Lemon Squeezy for secure payments. You can securely access your invoices and
+            manage your purchases below.</p>
+          <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" class="btn-primary"
+            style="padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-family: 'Inter', sans-serif;">Open
+            Billing Portal</a>
+        </div>
       </div>
-    </div>
 
-    <!-- BILLING PANE -->
-    <div class="profile-pane" id="pane-billing">
-      <div class="pane-header">
-        <h3>Billing & Orders</h3>
-        <p>Manage your payment methods and view past receipts.</p>
+      <!-- DOWNLOADS PANE -->
+      <div class="profile-pane" id="pane-downloads">
+        <div class="pane-header">
+          <h3>Downloads</h3>
+          <p>Download the latest version of the FileLocker desktop app.</p>
+        </div>
+        <div class="download-card">
+          <!-- Replaced absolute logo with text to avoid missing image -->
+          <div
+            style="width:48px; height:48px; background:#2563EB; color:white; border-radius:8px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:24px;">
+            FL</div>
+          <h4 style="font-size: 20px; margin-bottom: 16px;">FileLocker Desktop (v1.0.0)</h4>
+          <a href="https://github.com/qaisarifdhukka-code/filelocker-website/releases/download/v1.0.0/FileLocker.Setup.1.0.0.exe"
+            class="download-btn" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Download for Windows
+          </a>
+          <p style="margin-top: 20px; font-size: 13px; color: #6B7280;">Requires Windows 10 or 11.</p>
+        </div>
       </div>
-      <div class="billing-card">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5" style="margin: 0 auto 16px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        <h4 style="font-size: 20px; margin-bottom: 12px;">Customer Portal</h4>
-        <p>FileLocker partners with Lemon Squeezy for secure payments. You can securely access your invoices and manage your purchases below.</p>
-        <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" class="btn-primary" style="padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-family: 'Inter', sans-serif;">Open Billing Portal</a>
-      </div>
-    </div>
 
-    <!-- DOWNLOADS PANE -->
-    <div class="profile-pane" id="pane-downloads">
-      <div class="pane-header">
-        <h3>Downloads</h3>
-        <p>Download the latest version of the FileLocker desktop app.</p>
-      </div>
-      <div class="download-card">
-        <!-- Replaced absolute logo with text to avoid missing image -->
-        <div style="width:48px; height:48px; background:#2563EB; color:white; border-radius:8px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:24px;">FL</div>
-        <h4 style="font-size: 20px; margin-bottom: 16px;">FileLocker Desktop (v1.0.0)</h4>
-        <a href="https://github.com/qaisarifdhukka-code/filelocker-website/releases/download/v1.0.0/FileLocker.Setup.1.0.0.exe" class="download-btn" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download for Windows
-        </a>
-        <p style="margin-top: 20px; font-size: 13px; color: #6B7280;">Requires Windows 10 or 11.</p>
-      </div>
-    </div>
+    </main>
+  </div>
 
-  </main>
-</div>
+  {{> footer }}
 
-{{> footer }}
+  <script>
+    // Check auth
+    const token = localStorage.getItem('fl_token');
+    if (!token) window.location.href = 'login.html';
 
-<script>
-  // Check auth
-  const token = localStorage.getItem('fl_token');
-  if (!token) window.location.href = 'login.html';
-
-  // Decode JWT to get user email
-  function parseJwt(token) {
-    try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+    // Decode JWT to get user email
+    function parseJwt(token) {
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-      return JSON.parse(jsonPayload);
-    } catch(e) {
-      return null;
-    }
-  }
-
-  const payload = parseJwt(token);
-  if (payload && payload.email) {
-    document.getElementById('userEmail').textContent = payload.email;
-    document.getElementById('userInitial').textContent = payload.email.charAt(0).toUpperCase();
-  } else {
-    document.getElementById('userEmail').textContent = 'User';
-  }
-
-  // Tab Switching Logic
-  const tabs = document.querySelectorAll('.sidebar-tab');
-  const panes = document.querySelectorAll('.profile-pane');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      panes.forEach(p => p.classList.remove('active'));
-      
-      tab.classList.add('active');
-      const targetId = tab.getAttribute('data-target');
-      document.getElementById(targetId).classList.add('active');
-    });
-  });
-
-  // Load Licenses Logic
-  async function loadLicenses() {
-    try {
-      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/licenses', {
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      
-      if (res.status === 401 || res.status === 403) {
-        localStorage.removeItem('fl_token');
-        window.location.href = 'login.html';
-        return;
+        }).join(''));
+        return JSON.parse(jsonPayload);
+      } catch (e) {
+        return null;
       }
-      
-      const licenses = await res.json();
-      const container = document.getElementById('licenseContainer');
-      
-      if (licenses.length === 0) {
-        container.innerHTML = `
+    }
+
+    const payload = parseJwt(token);
+    if (payload && payload.email) {
+      document.getElementById('userEmail').textContent = payload.email;
+      document.getElementById('userInitial').textContent = payload.email.charAt(0).toUpperCase();
+    } else {
+      document.getElementById('userEmail').textContent = 'User';
+    }
+
+    // Tab Switching Logic
+    const tabs = document.querySelectorAll('.sidebar-tab');
+    const panes = document.querySelectorAll('.profile-pane');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panes.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        const targetId = tab.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+
+    // Load Licenses Logic
+    async function loadLicenses() {
+      try {
+        const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/licenses', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+
+        if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem('fl_token');
+          window.location.href = 'login.html';
+          return;
+        }
+
+        const licenses = await res.json();
+        const container = document.getElementById('licenseContainer');
+
+        if (licenses.length === 0) {
+          // Hide the Billing tab if no licenses
+          const billingTab = document.querySelector('[data-target="pane-billing"]');
+          if (billingTab) billingTab.style.display = 'none';
+
+          container.innerHTML = `
           <div style="text-align: center; padding: 40px; border: 1px dashed #D1D5DB; border-radius: 8px;">
             <p style="color: #6B7280; margin-bottom: 20px;">You don't have any active licenses yet.</p>
             <a href="pricing.html" class="btn-primary" style="padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">Buy FileLocker</a>
           </div>
         `;
-        return;
-      }
+          return;
+        }
 
-      container.innerHTML = licenses.map(lic => {
-        const isUsed = !!lic.used_by_hardware_id;
-        const statusClass = isUsed ? 'status-active' : 'status-unused';
-        const statusText = isUsed ? 'Active' : 'Unused';
-        
-        return `
+        // Show the Billing tab if they have licenses
+        const billingTab = document.querySelector('[data-target="pane-billing"]');
+        if (billingTab) billingTab.style.display = 'flex';
+
+        container.innerHTML = licenses.map(lic => {
+          const isUsed = !!lic.used_by_hardware_id;
+          const statusClass = isUsed ? 'status-active' : 'status-unused';
+          const statusText = isUsed ? 'Active' : 'Unused';
+
+          return `
           <div class="license-card">
             <div class="license-info">
               <h4>Pro License Key</h4>
@@ -238,47 +486,48 @@
               ${isUsed ? `<div style="margin-top:12px; font-size:12px; color:#9CA3AF; font-family:monospace;">Device: ${lic.used_by_hardware_id}</div>` : ''}
             </div>
             <div>
-              ${isUsed 
-                ? `<button class="action-btn" onclick="unlinkMachine('${lic.license_key}')">Unlink Device</button>`
-                : `<button class="action-btn" style="opacity:0.5; cursor:not-allowed;" disabled>Unlink Device</button>`
-              }
+              ${isUsed
+              ? `<button class="action-btn" onclick="unlinkMachine('${lic.license_key}')">Unlink Device</button>`
+              : `<button class="action-btn" style="opacity:0.5; cursor:not-allowed;" disabled>Unlink Device</button>`
+            }
             </div>
           </div>
         `;
-      }).join('');
-      
-    } catch (err) {
-      console.error(err);
-      document.getElementById('licenseContainer').innerHTML = '<div style="color:red; text-align:center; padding: 40px;">Error loading licenses. Please try again.</div>';
-    }
-  }
+        }).join('');
 
-  async function unlinkMachine(licenseKey) {
-    if (!confirm('Are you sure you want to unlink this device? The desktop app will require reactivation.')) return;
-    
-    try {
-      const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/unlink', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({ licenseKey })
-      });
-      
-      if (res.ok) {
-        alert('Device unlinked successfully! You can now use this key on a new computer.');
-        loadLicenses();
-      } else {
-        const data = await res.json();
-        alert('Error: ' + data.error);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('licenseContainer').innerHTML = '<div style="color:red; text-align:center; padding: 40px;">Error loading licenses. Please try again.</div>';
       }
-    } catch (err) {
-      alert('Network error.');
     }
-  }
 
-  loadLicenses();
-</script>
+    async function unlinkMachine(licenseKey) {
+      if (!confirm('Are you sure you want to unlink this device? The desktop app will require reactivation.')) return;
+
+      try {
+        const res = await fetch('https://filelocker-license-server.qaisarifdhukka.workers.dev/api/unlink', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ licenseKey })
+        });
+
+        if (res.ok) {
+          alert('Device unlinked successfully! You can now use this key on a new computer.');
+          loadLicenses();
+        } else {
+          const data = await res.json();
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Network error.');
+      }
+    }
+
+    loadLicenses();
+  </script>
 </body>
+
 </html>
