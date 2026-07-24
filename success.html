@@ -81,8 +81,8 @@
       </button>
       
       <div id="dashboardLink">
-        <a href="dashboard.html">
-          Go to my Dashboard
+        <a href="profile.html">
+          Go to my Profile
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -146,7 +146,7 @@
       if (retries < 15) {
         setTimeout(() => checkLicense(retries + 1), 2000);
       } else {
-        subtitle.textContent = "Your payment is taking longer than usual to verify. Please check your dashboard in a few minutes.";
+        subtitle.textContent = "Your payment is taking longer than usual to verify. Please check your profile in a few minutes.";
         keyInput.value = "PENDING";
       }
     } catch (err) {

@@ -68,7 +68,7 @@ export default defineConfig({
         terms: resolve(__dirname, 'terms.html'),
         login: resolve(__dirname, 'login.html'),
         register: resolve(__dirname, 'register.html'),
-        dashboard: resolve(__dirname, 'dashboard.html'),
+        profile: resolve(__dirname, 'profile.html'),
         success: resolve(__dirname, 'success.html'),
       },
     },
