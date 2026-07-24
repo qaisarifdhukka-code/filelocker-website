@@ -737,3 +737,53 @@
     margin-top:14px; font-family:'Space Grotesk',sans-serif; font-size:13px;
     color: var(--navy); font-weight:600;
   }
+
+  /* ===== MOBILE RESPONSIVENESS ===== */
+  @media (max-width: 860px) {
+    /* Hero */
+    .hero-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
+    }
+    .hero-grid > div:first-child {
+      order: -1; /* Ensures text is always on top */
+    }
+    .hero::before { display: none; }
+    h1.headline { font-size: 36px; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .pill-row { justify-content: center; }
+    .trust-line { margin-left: auto; margin-right: auto; justify-content: center; text-align: center; }
+    
+    /* Global Layouts */
+    .feature-grid, .persona-grid, .steps, .pricing-grid, .footer-top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .wrap { padding: 0 20px; }
+    
+    /* Footer */
+    .footer-top { text-align: center; justify-content: center; }
+    .footer-brand { align-items: center; }
+    .footer-brand .logo { justify-content: center; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .legal-links { justify-content: center; }
+    
+    /* Profile & Auth */
+    .profile-layout { flex-direction: column; }
+    .profile-sidebar { 
+      width: 100%; 
+      border-right: none; 
+      border-bottom: 1px solid var(--line); 
+      padding-bottom: 24px; 
+    }
+    .auth-card {
+      padding: 32px 20px;
+    }
+    
+    /* Nav fallback */
+    .nav-links { display: none; }
+    .nav-cta .btn { display: none; }
+    .nav-cta .signin { display: block; }
+  }
