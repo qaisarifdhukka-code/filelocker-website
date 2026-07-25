@@ -803,6 +803,16 @@
       padding: 32px 20px;
     }
     
+    /* Security & Threat Table */
+    .security-cols {
+      grid-template-columns: 1fr;
+    }
+    .threat-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
     /* Nav fallback */
     .nav-links { display: none; }
     .nav-cta .btn { display: none; }
