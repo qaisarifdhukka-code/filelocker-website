@@ -757,9 +757,30 @@
     .trust-line { margin-left: auto; margin-right: auto; justify-content: center; text-align: center; }
     
     /* Global Layouts */
-    .feature-grid, .persona-grid, .steps, .pricing-grid, .footer-top {
+    .feature-grid, .persona-grid, .pricing-grid, .footer-top {
       grid-template-columns: 1fr;
       gap: 32px;
+    }
+
+    /* Trust Strip */
+    .trust-strip .wrap {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    /* Steps */
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .step {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .step:last-child {
+      border-bottom: none;
     }
     .wrap { padding: 0 20px; }
     
