@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FileLocker — Secure Document Delivery for Lawyers, Accountants & Photographers | Zero Install</title>
+<title>FileLocker — Encrypted file delivery. Zero install.</title>
 <link rel="icon" type="image/png" href="/Favicon.png">
-<meta name="description" content="Send sensitive client files with military-grade protection. Your client opens them in any browser — no software to install, no cloud account, no risk. One-time $29. 30-day money-back guarantee.">
-<meta property="og:title" content="FileLocker — Secure Document Delivery for Lawyers, Accountants & Photographers | Zero Install">
-<meta property="og:description" content="Send sensitive client files with military-grade protection. Your client opens them in any browser — no software to install, no cloud account, no risk. One-time $29. 30-day money-back guarantee.">
+<meta name="description" content="FileLocker encrypts any file onto a USB drive with AES-256-GCM security. Your client opens one file in their browser and their file downloads instantly. No cloud, no install, no risk.">
+<meta property="og:title" content="FileLocker — Encrypted file delivery. Zero install.">
+<meta property="og:description" content="FileLocker encrypts any file onto a USB drive with AES-256-GCM security. Your client opens one file in their browser and their file downloads instantly. No cloud, no install, no risk.">
 <meta property="og:image" content="/og-image.png">
 <meta property="og:type" content="website">
 <script defer data-domain="filelocker.app" src="https://plausible.io/js/script.js"></script>
@@ -16,44 +16,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/css/style.css">
 <style>
-  /* Extra page-level styles based on analysis */
-  .problem-section p {
-    font-size: 16.5px;
-    color: var(--ink-soft);
-    max-width: 720px;
-    margin-bottom: 32px;
-  }
-  .pain-point {
-    margin-bottom: 24px;
-    max-width: 720px;
-  }
-  .pain-point h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  .pain-point p {
-    font-size: 15.5px;
-    color: var(--ink-soft);
-    margin-bottom: 0;
-  }
-  .solution-section {
-    background: var(--navy-deep);
-    color: #F2EFE6;
-    padding: 72px 0;
-    text-align: center;
-  }
-  .solution-section h2 {
-    color: #F7F5EF;
-    font-size: clamp(28px, 3.4vw, 40px);
-    margin-bottom: 24px;
-  }
-  .solution-section p {
-    color: #B9C0CD;
-    font-size: 18px;
-    max-width: 700px;
-    margin: 0 auto 20px;
-  }
-  /* Pricing card styles */
   .single-pricing-card {
     max-width: 900px;
     margin: 0 auto;
@@ -122,6 +84,7 @@
     color: #6B7280;
     line-height: 1.5;
   }
+  
   .pricing-right h3 {
     font-size: 20px;
     font-weight: 600;
@@ -136,6 +99,7 @@
     border-bottom: none;
     font-size: 15px;
   }
+  
   @media (max-width: 768px) {
     .single-pricing-card {
       flex-direction: column;
@@ -145,40 +109,29 @@
       border-bottom: 1px solid #EAEAEA;
     }
   }
-
-  /* Compare section dark adjustments */
-  .compare-dark { border-color: rgba(255,255,255,0.1) !important; }
-  .compare-dark .compare-col.without { background: rgba(255,255,255,0.05); }
-  .compare-dark .compare-col.without .compare-title { color: rgba(255,255,255,0.5); }
-  .compare-dark .compare-col.without li { color: #fff; border-color: rgba(255,255,255,0.1); }
-  .compare-dark .compare-col.without li::before { content: "✗"; color: var(--red); }
-  .compare-dark .compare-col.without li:last-child { border-color: transparent; }
 </style>
 </head>
 <body>
 
 {{> header }}
 
-<!-- HERO SECTION -->
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="trust-line">For lawyers, accountants, and photographers</div>
-        <h1 class="headline">Deliver sensitive files to clients.<br><span class="accent">Locked. Private. No install required.</span></h1>
-        <p class="hero-sub">FileLocker protects your documents with the same security used by the US military — and your clients open them in any browser with a single click. No software installation. No cloud account. No risk.</p>
+        <div class="trust-line">Built for professionals who handle sensitive data</div>
+        <h1 class="headline" id="scrambleHeadline">Your files, encrypted.<br>Delivered on <span class="accent">USB</span>.</h1>
+        <p class="hero-sub">FileLocker encrypts any file onto a USB drive with AES-256-GCM security. Your client opens one HTML file in their browser and the download starts instantly — no software, no account, no internet required.</p>
         <div class="hero-actions">
-          <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
-          <a href="#how" class="btn btn-ghost">See how it works</a>
+          <a href="/pricing.html" class="btn btn-primary">Get FileLocker — Just $29 →</a>
+          <a href="https://github.com/qaisarifdhukka-code/filelocker-website/releases/download/v1.0.0/FileLocker-Setup.exe" class="btn btn-ghost" style="display: inline-flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801"/>
+            </svg>
+            Download for Windows
+          </a>
         </div>
-        <div class="hero-guarantee">✓ One-time payment &nbsp;&nbsp;✓ Lifetime updates<br>✓ 30-day money-back guarantee &nbsp;&nbsp;✓ Windows 10 & 11</div>
-        <div class="pill-row" style="margin-top:24px;">
-          <div class="pill"><div class="dot"></div>Military-Grade Security</div>
-          <div class="pill"><div class="dot"></div>100% Offline</div>
-          <div class="pill"><div class="dot"></div>HIPAA Workflows</div>
-          <div class="pill"><div class="dot"></div>Zero Install for Clients</div>
-          <div class="pill"><div class="dot"></div>One-time $29</div>
-        </div>
+        <div class="hero-guarantee">One-time payment · Lifetime updates · 30-day money-back guarantee</div>
       </div>
 
       <div class="hero-visual">
@@ -186,444 +139,331 @@
           <img src="/screenshot-set-password.png" alt="Set Password Screen" class="screenshot-main">
           <img src="/screenshot-unlock.png" alt="Unlock Vault Screen" class="screenshot-secondary">
         </div>
+
+        <svg class="seal" viewBox="0 0 120 120">
+          <defs>
+            <path id="sealring" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+          </defs>
+          <circle cx="60" cy="60" r="58" fill="none" stroke="#2563EB" stroke-width="1"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#CBD1DB" stroke-width="1" stroke-dasharray="2 3"/>
+          <text font-family="Space Grotesk, sans-serif" font-size="7.2" fill="#8A93A3" letter-spacing="2">
+            <textPath href="#sealring">· AES-256-GCM · ARGON2ID · ZERO CLOUD ·</textPath>
+          </text>
+          <g transform="translate(60,60)">
+            <rect x="-9" y="-2" width="18" height="14" rx="2" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+            <path d="M -5,-2 V -7 A 5,5 0 0 1 5,-7 V -2" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+          </g>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST STRIP -->
 <div class="trust-strip">
   <div class="wrap">
-    <span>🔒 Military-Grade Encryption</span>
-    <span>📴 100% Offline — No Cloud</span>
-    <span>✓ HIPAA Workflows</span>
-    <span>💻 Zero Install for Your Clients</span>
-    <span>💳 One-time $29 — No Subscription</span>
+    <span>AES-256-GCM Encryption</span>
+    <span>100% Offline — No Cloud</span>
+    <span>Built for HIPAA &amp; GDPR Workflows</span>
+    <span>Zero Install for Recipients</span>
+    <span>One-time payment of $29</span>
   </div>
 </div>
 
-<!-- THE PROBLEM SECTION -->
-<section class="problem-section section-alt">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">The problem</div>
-      <h2>Every professional has done this at least once.</h2>
-    </div>
-    
-    <p>You needed to send a sensitive document to a client fast. So you put it on a USB drive — or emailed it — or used a personal Dropbox link. Not because you didn't care about security. Because the secure option was too complicated, too slow, or would have required your client to install something they didn't want to.</p>
-    <p><strong>That five-minute shortcut is where most confidential data gets exposed.</strong></p>
-    
-    <div style="margin-top: 40px;">
-      <div class="pain-point">
-        <h3>Pain 1 — Plain USB drives:</h3>
-        <p>If a USB drive with your client's documents is left in a taxi, lost at a conference, or picked up by the wrong person — every file on it is readable in seconds. No password. No delay. No warning.</p>
-      </div>
-      
-      <div class="pain-point">
-        <h3>Pain 2 — ZIP files and legacy tools:</h3>
-        <p>Standard ZIP encryption was broken decades ago. And tools like VeraCrypt or 7-Zip require your client to install software — something most clients refuse, can't figure out, or are blocked from doing on their work computer.</p>
-      </div>
-      
-      <div class="pain-point">
-        <h3>Pain 3 — Cloud services:</h3>
-        <p>Sending files via Dropbox, WeTransfer, or Google Drive means your client's documents live on someone else's server. That is not a secure delivery. That is a compliance problem waiting to happen.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION STATEMENT (dark section) -->
-<section class="solution-section">
-  <div class="wrap">
-    <h2>FileLocker was built to fix exactly this.</h2>
-    <p>You protect the files. Your client opens them in their browser. No cloud. No install. No compromise.</p>
-    <p>FileLocker lets you lock any document with military-grade protection, save it to any USB drive or folder, and hand it to your client. They open one file in Chrome, Edge, Safari, or Firefox — type the password — and their documents download directly to their computer.</p>
-    <p><strong>That is it. The entire workflow.</strong></p>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
 <section id="how">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">How it works</div>
-      <h2>Simple for you. One click for them.</h2>
-      <p>The entire process — from protecting your files to your client opening them — takes less time than writing an email.</p>
+      <h2>Simple for you. Effortless for them.</h2>
+      <p>Three steps, no internet connection required at any point.</p>
     </div>
-    
-    <h3 style="font-size: 22px; margin-bottom: 24px;">--- SENDER SIDE ---</h3>
-    <div class="flow-steps" style="margin-bottom: 48px;">
-      <div class="flow-step">
-        <span class="num mono">*</span>
-        <div>
-          <h3>Before you start:</h3>
-          <p>After purchasing FileLocker, you receive a license key by email. Enter it once to activate the software. Takes 30 seconds. You never need to do it again.</p>
-        </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num mono">01 — YOU</span>
+        <h3>Select your file. Set a password.</h3>
+        <p>Open FileLocker on your Windows PC, plug in a USB drive, and choose any file or folder — up to 10GB and beyond. Set a strong password and FileLocker encrypts it in seconds.</p>
+        <div class="step-tag mono">AES-256-GCM · ARGON2ID KEY DERIVATION</div>
       </div>
-      <div class="flow-step">
-        <span class="num mono">*</span>
-        <div>
-          <h3>Optional — Set up your firm's branding:</h3>
-          <p>Add your firm's name, logo, and brand colors to FileLocker. When your client opens their files, they see your firm's branding — not ours. It looks like your own professional secure delivery system.</p>
-        </div>
+      <div class="step">
+        <span class="step-num mono">02 — HANDOFF</span>
+        <h3>Hand the USB to your client.</h3>
+        <p>FileLocker writes the encrypted vault and a standalone unlock page to the drive. Hand it over in person — no internet needed. If it's lost, the contents stay unreadable.</p>
+        <div class="step-tag mono">DRIVE LOCKED · READY TO DISTRIBUTE</div>
       </div>
-      <div class="flow-step">
-        <span class="num mono">01</span>
-        <div>
-          <h3>Choose where to save:</h3>
-          <p>Select any USB drive plugged into your computer. FileLocker shows you all available drives with their available storage. Pick the right one and continue.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">02</span>
-        <div>
-          <h3>Select your documents:</h3>
-          <p>Browse your computer and choose the file or folder you need to send. Any format, any size — up to 10 gigabytes and beyond. If you select a folder, FileLocker automatically bundles everything inside it.</p>
-          <div style="margin-top: 12px; padding: 16px; background: var(--paper); border-radius: 8px;">
-            <strong style="display:block; margin-bottom: 8px;">Two optional settings most professionals love:</strong>
-            <ul style="list-style-type: disc; margin-left: 20px;">
-              <li style="margin-bottom: 4px; font-size: 14.5px; color: var(--ink-soft);">Auto-delete the original file from your computer after locking — so no unprotected copy remains</li>
-              <li style="font-size: 14.5px; color: var(--ink-soft);">Hide the real file name — so even the document name stays private (e.g., your client's file appears as "Secure_Data" instead of "Divorce_Settlement.pdf")</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">03</span>
-        <div>
-          <h3>Create a password:</h3>
-          <p>Type a strong password — or let FileLocker generate one for you automatically. Add an optional hint to help your client remember without giving away the password itself. The password is never saved anywhere on your computer or any server.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">04</span>
-        <div>
-          <h3>Lock and deliver:</h3>
-          <p>Click Lock Files. FileLocker protects your documents and saves everything to the USB drive in seconds. A green confirmation screen confirms it worked. Hand the drive to your client.</p>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-size: 22px; margin-bottom: 24px;">--- RECIPIENT SIDE ---</h3>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <span class="num mono">01</span>
-        <div>
-          <h3>Plug in and open:</h3>
-          <p>Your client inserts the USB drive and double-clicks one file. It opens instantly in their web browser.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">02</span>
-        <div>
-          <h3>No software needed. At all:</h3>
-          <p>Nothing downloads. Nothing installs. No account required. If they can open a website, they can open their documents.</p>
-          <p style="margin-top:8px;"><em>Note: Your client will see your firm's name and logo on this screen — not FileLocker's. It looks like your own professional system.</em></p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">03</span>
-        <div>
-          <h3>Enter the password:</h3>
-          <p>Your client types the password you shared with them separately (by phone or text — never on the USB itself). The optional hint you added appears here if they need a reminder.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">04</span>
-        <div>
-          <h3>Documents saved:</h3>
-          <p>Their browser unlocks the files entirely on their computer — no data is sent to any server. A save dialog appears and their documents are saved directly to their device. Done.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="num mono">!</span>
-        <div>
-          <h3>Important note about sharing the password:</h3>
-          <p>Share the password separately from the USB drive. Call your client, text them, or tell them in person. Never write the password on the drive or include it in the same package. This separation is what makes the delivery genuinely secure.</p>
-        </div>
+      <div class="step">
+        <span class="step-num mono">03 — YOUR CLIENT</span>
+        <h3>Open one file. Get their files.</h3>
+        <p>They plug in the USB, open Unlock_Vault.html in any browser, type the password, and their file downloads directly. No install, no account, no internet.</p>
+        <div class="step-tag mono">CHROME · EDGE · SAFARI · FIREFOX</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VIDEO SECTION -->
-<section id="demo" class="section-alt">
+<section id="demo" style="background: #F9FAFB;">
   <div class="wrap">
     <div class="section-head center">
       <div class="eyebrow" style="justify-content:center;">See it in action</div>
-      <h2>Watch the full workflow in 90 seconds.</h2>
-      <p>From locking your files to your client opening them — the complete process, start to finish.</p>
+      <h2>90 seconds to secure delivery.</h2>
     </div>
     <div class="video-container" style="max-width: 900px; margin: 0 auto; background: #000; aspect-ratio: 16/9; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
       <p style="color: #fff; opacity: 0.7; font-family: 'Space Grotesk', sans-serif;">Video Demo Placeholder</p>
     </div>
-    <p style="text-align:center; font-size:13px; color:var(--ink-faint); margin-top:16px;">90 seconds · Captions included · No software required to watch</p>
   </div>
 </section>
 
-<!-- WHO IT'S FOR -->
 <section id="who">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Who uses FileLocker</div>
-      <h2>Built for professionals who deliver sensitive documents to clients.</h2>
-      <p>If your clients receive confidential files from you — FileLocker was built for your workflow.</p>
+      <div class="eyebrow">Who it's for</div>
+      <h2>Built for professionals who handle sensitive data.</h2>
+      <p>If you regularly hand files to clients on physical media, FileLocker was built for you.</p>
     </div>
     <div class="persona-grid">
       <div class="persona-card">
         <div class="persona-role mono">Legal</div>
-        <h4>Lawyers & Law Firms</h4>
-        <p>"I deliver case files, contracts, and evidence to clients knowing that even if the USB drive gets lost — nobody can read what's inside without the password."</p>
-      </div>
-      <div class="persona-card">
-        <div class="persona-role mono">Finance</div>
-        <h4>Accountants & CPAs</h4>
-        <p>"Tax season means handing tax returns and financial statements to clients. FileLocker makes that handoff completely private — and my clients don't need to install a thing."</p>
+        <h4>Lawyers &amp; Law Firms</h4>
+        <p>"I deliver case files and evidence to clients on USB without worrying about the drive falling into the wrong hands."</p>
       </div>
       <div class="persona-card">
         <div class="persona-role mono">Creative</div>
-        <h4>Photographers & Videographers</h4>
-        <p>"My clients' wedding photos are private until they personally unlock them. No cloud service involved. No way for anyone else to access them first."</p>
+        <h4>Photographers &amp; Videographers</h4>
+        <p>"My wedding shoots stay protected until the client personally unlocks them. No more plain USBs at risk."</p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-role mono">Finance</div>
+        <h4>Accountants &amp; Advisors</h4>
+        <p>"Tax returns and financial statements go to my client knowing only they can ever open them. Nobody else, ever."</p>
       </div>
       <div class="persona-card">
         <div class="persona-role mono">Healthcare</div>
         <h4>Healthcare Providers</h4>
-        <p>"Patient records delivered on a drive, protected the right way. My clients open them in their browser without downloading anything."</p>
+        <p>"Patient records delivered on physical media, encrypted to standards built for HIPAA workflows. No cloud risk."</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES SECTION -->
-<section id="features" class="section-alt">
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Testimonials</div>
+      <h2>Trusted by professionals.</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>"Testimonial coming soon — be our first reviewer."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <span class="author-name">Beta User</span>
+            <span class="author-role">Legal Professional</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Testimonial coming soon — be our first reviewer."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <span class="author-name">Beta User</span>
+            <span class="author-role">Creative Agency</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Testimonial coming soon — be our first reviewer."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <span class="author-name">Beta User</span>
+            <span class="author-role">Financial Advisor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Features</div>
-      <h2>Everything your workflow needs. Nothing it doesn't.</h2>
+      <h2>Everything you need. Nothing you don't.</h2>
     </div>
-    
-    <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr); gap: 24px; background: transparent; border: none; overflow: visible;">
-      <div class="feature" style="grid-column: span 2; background: var(--navy-deep); color: #F2EFE6; border-radius: var(--radius-m);">
-        <h3 style="color: #fff; font-size: 22px; margin-bottom: 12px;">Clients see your brand. Not ours.</h3>
-        <p style="color: #B9C0CD; font-size: 16px;">Upload your firm's logo, set your brand color, and add your firm's name. When your client opens the USB drive, the unlock screen shows your identity — not FileLocker's. It looks like your own proprietary secure delivery system.</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M7.5 10V7a4.5 4.5 0 0 1 9 0v3"/></svg></div>
+        <h3>AES-256-GCM Encryption</h3>
+        <p>The same standard used by banks, governments, and the US military. Unreadable without the password — that's mathematics, not a claim.</p>
       </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>Your client opens a browser. That's it.</h3>
-        <p>No software download. No account creation. No tech support call. If your client has Chrome, Edge, Safari, or Firefox — they can open their files.</p>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Zero Install for Recipients</h3>
+        <p>Your client opens a single HTML file in their browser. No download, no account, no support call. It just works.</p>
       </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>No cloud. No server. No exposure.</h3>
-        <p>The entire process — locking and unlocking — happens on the physical devices. No file or password ever touches a server. Because no server is involved.</p>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/></svg></div>
+        <h3>100% Offline Operation</h3>
+        <p>No internet required, no cloud servers, no data harvesting. Everything happens locally on the physical devices involved.</p>
       </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>No unprotected copies left behind.</h3>
-        <p>Check one box and FileLocker automatically deletes the original unprotected file from your computer after locking. Nothing sensitive remains.</p>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 9h18"/></svg></div>
+        <h3>Cross-Platform Unlocking</h3>
+        <p>Recipients can unlock on Windows, Mac, or Linux using Chrome, Edge, Safari, or Firefox. If they have a browser, they can unlock.</p>
       </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>Even the file name stays private.</h3>
-        <p>Optionally hide the real name of your document so the USB drive reveals nothing — not even what kind of file is on it.</p>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M12 4v16M4 12h16"/></svg></div>
+        <h3>Files Up to 10GB and Beyond</h3>
+        <p>Stream-based AES-GCM chunking means even massive video files and datasets encrypt smoothly without breaking a sweat.</p>
       </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>10 gigabytes and beyond.</h3>
-        <p>Documents, folders, videos, archives — FileLocker handles files of any size without slowing down or breaking a sweat.</p>
-      </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m);">
-        <h3>Your clients won't forget their password.</h3>
-        <p>Add an optional hint when you set the password. Your client sees it on the unlock screen if they need a reminder — without revealing the password.</p>
-      </div>
-      
-      <div class="feature" style="border: 1px solid var(--line); border-radius: var(--radius-m); grid-column: span 2;">
-        <h3>Strong password in one click.</h3>
-        <p>Not sure what password to use? Let FileLocker generate a strong, random password automatically. Save it in your password manager before you click Lock.</p>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <h3>Custom White-Labeling</h3>
+        <p>Customize the recipient's unlock screen with your firm's logo and colors — included in every license.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECURITY SECTION -->
 <section>
   <div class="wrap">
-    <div class="security-section" style="grid-template-columns: 1fr;">
-      <div style="text-align: center; max-width: 700px; margin: 0 auto 32px;">
-        <div class="eyebrow" style="justify-content: center;">Security</div>
-        <h2>Military-grade is not marketing. It's mathematics.</h2>
-      </div>
-      
-      <div class="security-cols" style="color: #fff;">
-        <div class="security-col">
-          <h3 style="color:#fff;">The same protection used by the US military.</h3>
-          <p style="color:#B9C0CD;">FileLocker uses AES-256 — the encryption standard approved by the US government for classified information. It is not a marketing claim. It is a mathematical guarantee. Without the exact password, the files are completely unreadable — even to us.</p>
-        </div>
-        <div class="security-col">
-          <h3 style="color:#fff;">Passwords that resist brute force attacks.</h3>
-          <p style="color:#B9C0CD;">Your password is not stored as-is. FileLocker transforms it using Argon2id — a system designed to make automated password-guessing attacks computationally impossible, even on modern hardware.</p>
-        </div>
-        <div class="security-col">
-          <h3 style="color:#fff;">Everything stays on your devices.</h3>
-          <p style="color:#B9C0CD;">Unlocking happens entirely inside your client's browser. No file, no password, and no document metadata ever travels to any server — because no server is involved at any point.</p>
-        </div>
-      </div>
-      
-      <div class="badge-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 32px;">
-        <div class="sec-badge" style="justify-content:center;">Military-Grade Encryption</div>
-        <div class="sec-badge" style="justify-content:center;">Argon2id Protection</div>
-        <div class="sec-badge" style="justify-content:center;">HIPAA Workflows</div>
-        <div class="sec-badge" style="justify-content:center;">GDPR Article 32</div>
-        <div class="sec-badge" style="justify-content:center;">Zero Data Transmission</div>
-        <div class="sec-badge" style="justify-content:center;">100% Offline</div>
-        <div class="sec-badge" style="justify-content:center;">No Cloud Infrastructure</div>
-        <div class="sec-badge" style="justify-content:center;">Web Crypto API</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPARISON SECTION (dark) -->
-<section style="background: var(--ink); color: #fff;">
-  <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow" style="color: var(--brass-soft);">Why FileLocker</div>
-      <h2 style="color: #fff;">Not all document delivery is equal.</h2>
+      <div class="eyebrow">Why FileLocker</div>
+      <h2>Not all USB delivery is equal.</h2>
     </div>
-    <div class="compare compare-dark">
+    <div class="compare">
       <div class="compare-col without">
         <span class="compare-title">Without FileLocker</span>
         <ul>
-          <li>Anyone who finds a plain USB drive reads everything instantly — no barrier, no delay</li>
-          <li>ZIP files require your client to install software most of them refuse to install</li>
-          <li>Standard ZIP encryption was broken decades ago</li>
-          <li>Cloud services store your files on third-party servers</li>
-          <li>No compliance documentation for HIPAA or ABA Rule 1.6</li>
+          <li>Anyone who finds the drive reads everything instantly</li>
+          <li>Recipient needs WinRAR, 7-Zip or VeraCrypt installed</li>
+          <li>Outdated interfaces confuse non-technical clients</li>
+          <li>Cloud alternatives expose data to third-party servers</li>
+          <li>If the USB is lost, all files are fully exposed</li>
         </ul>
       </div>
-      <div class="compare-col with" style="background: var(--navy-deep);">
-        <span class="compare-title mono" style="color: var(--brass-soft);">With FileLocker</span>
+      <div class="compare-col with">
+        <span class="compare-title mono">With FileLocker</span>
         <ul>
-          <li>Military-grade protection — unreadable without the exact password, mathematically guaranteed</li>
-          <li>Your client opens one file in their browser — zero software installation required</li>
-          <li>Works on Windows, Mac, and Linux — any modern browser</li>
-          <li>Completely offline — no cloud, no server, no third-party access</li>
-          <li>Encrypted physical delivery that supports HIPAA workflows and ABA Rule 1.6 compliance</li>
+          <li>AES-256 encrypted — unreadable without the password</li>
+          <li>Opens in any browser — zero install for recipient</li>
+          <li>Clean modern interface anyone understands immediately</li>
+          <li>100% offline — no servers, no cloud, no exposure</li>
+          <li>Lost USB means nothing — the data is mathematically locked</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING SECTION -->
-<section id="pricing" class="section-alt">
+<section>
+  <div class="wrap">
+    <div class="security-section">
+      <div>
+        <div class="eyebrow">Security</div>
+        <h2>Military-grade is not marketing. It's mathematics.</h2>
+        <p>FileLocker uses AES-256-GCM, the algorithm standard approved for top-secret data. Keys are derived with Argon2id, winner of the Password Hashing Competition, built to resist brute-force attacks even on modern GPU hardware.</p>
+        <p>Decryption happens entirely inside the recipient's browser using the Web Crypto API. No file, password, or metadata ever touches a server — because no server is involved.</p>
+      </div>
+      <div class="badge-grid">
+        <div class="sec-badge">AES-256-GCM</div>
+        <div class="sec-badge">Argon2id KDF</div>
+        <div class="sec-badge">Web Crypto API</div>
+        <div class="sec-badge">Zero Transmission</div>
+        <div class="sec-badge">No Cloud Infra</div>
+        <div class="sec-badge">Offline-First</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
   <div class="wrap">
     <div class="section-head center">
       <div class="eyebrow" style="justify-content:center;">Pricing</div>
       <h2>Pay once. Own it forever.</h2>
-      <p>No subscriptions. No monthly fees. No renewal reminders. No surprises.</p>
+      <p>Everything included. No subscriptions. No monthly fees. No surprises.</p>
     </div>
     
     <div class="single-pricing-card">
       <div class="pricing-left">
         <div class="tier-name">FileLocker</div>
-        <div class="price-amount">$29</div>
-        <div class="price-note" style="font-weight: 500; color: #4B5563; font-size: 16px; margin-top: 4px;">One-time payment</div>
-        <a href="register.html?buy=true" class="btn btn-primary" id="pricingGetBtn">Get FileLocker — $29</a>
+        <div class="price-amount"><del>$59</del>$29</div>
+        <div class="price-note" style="font-weight: 500; color: #4B5563; font-size: 16px; margin-top: 4px;">one-time</div>
+        <a href="register.html?buy=true" class="btn btn-primary">Get FileLocker</a>
+        <div class="price-note">Secure lifetime access.<br>No monthly fees.</div>
       </div>
       <div class="pricing-right">
-        <h3>What's included:</h3>
+        <h3>Included Features</h3>
         <ul class="price-list">
-          <li>FileLocker desktop app (Windows 10 & 11)</li>
-          <li>Military-grade file protection</li>
-          <li>Zero-install experience for your clients</li>
-          <li>Custom branding — your logo, name, and colors</li>
-          <li>Auto-delete and hidden file name options</li>
-          <li>Built-in password generator</li>
-          <li>Password hints for clients</li>
-          <li>Files up to 10GB and beyond</li>
-          <li>Works on any USB drive or folder</li>
-          <li>Lifetime updates included</li>
+          <li>FileLocker desktop app (Windows 10 &amp; 11)</li>
+          <li>AES-256-GCM military-grade encryption</li>
+          <li>Zero-install recipient experience</li>
+          <li>Full white-labeling &amp; custom branding</li>
+          <li>Unlimited file encryption (up to 10GB+)</li>
+          <li>Password hints &amp; strength meter</li>
           <li>Priority email support</li>
+          <li>Lifetime updates included</li>
         </ul>
       </div>
-    </div>
-    
-    <div style="max-width: 900px; margin: 32px auto 0; text-align: center; background: #fff; padding: 24px; border: 1px solid var(--line); border-radius: 8px;">
-      <p style="margin-bottom: 12px; font-size: 16px;"><strong>30-day money-back guarantee — no questions asked.</strong></p>
-      <p style="color: var(--ink-soft); font-size: 14.5px;">If FileLocker doesn't work exactly as described, contact us within 30 days for a full refund.</p>
-    </div>
-    
-    <div style="max-width: 900px; margin: 24px auto 0; text-align: center;">
-      <p style="color: var(--ink-soft); font-size: 14.5px;"><strong>Enterprise note:</strong> Need licenses for your entire firm or team? <a href="/contact.html" style="color: var(--navy); text-decoration: underline;">Contact us</a> for enterprise pricing.</p>
     </div>
   </div>
 </section>
 
-<!-- FAQ SECTION -->
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Liability</div>
+      <h2>Standard USB drives are a massive liability.</h2>
+      <p style="max-width: 700px; margin: 0 auto; color: #4B5563; font-size: 18px; line-height: 1.6;">
+        If you lose a standard USB drive containing sensitive client documents, medical records, or financial statements, you are legally liable for a data breach. FileLocker mathematically guarantees that lost drives remain completely unreadable to anyone who finds them. The peace of mind is worth $29.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">FAQ</div>
-      <h2>Questions answered honestly.</h2>
+      <h2>Questions answered.</h2>
     </div>
     <div class="faq-list" id="faqList">
       <div class="faq-item">
-        <div class="faq-q">Does my client need to install any software?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>No — and that is the whole point. Your client opens one file in their web browser and types a password. Nothing downloads. Nothing installs. No account required. If they can visit a website, they can open their documents.</p></div>
+        <div class="faq-q">Does the recipient need to install any software?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. The recipient opens a single HTML file in any modern browser — Chrome, Edge, Safari, or Firefox. No download, no account, no installation of any kind.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What happens if the USB drive is lost or stolen?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>Nothing — and this is exactly what FileLocker is for. The files on the drive are protected with military-grade encryption. Without the correct password, whoever finds the drive cannot read a single byte of the contents. Mathematically guaranteed.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What if I forget the password?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>Because FileLocker works completely offline with no servers involved, there is no password recovery option. This is a security feature, not a limitation — a recovery system would mean someone else could access your files. We strongly recommend using the built-in password generator and saving the result in your password manager before clicking Lock. The optional hint feature also helps your client remember without giving away the password itself.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Does my client need to know anything about technology?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>If they can open a website and type a word, they can open their files. The unlock screen is designed for non-technical clients. It has one field, one button, and your firm's branding on the screen.</p></div>
+        <div class="faq-a"><p>Nothing. The encrypted vault on the drive is unreadable without the correct password. There's no backdoor and no recovery mechanism — which is exactly what makes it secure.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Does FileLocker work on Mac?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>The desktop app for locking files runs on Windows 10 and 11. Your clients can unlock files on Windows, Mac, or Linux — any computer with a modern browser. macOS sender support is on our roadmap.</p></div>
+        <div class="faq-a"><p>The desktop encryption app currently runs on Windows 10 and 11. Recipients on Mac can seamlessly unlock files — any browser on any operating system works for unlocking.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">How do I share the password with my client?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>Share it separately from the USB drive — call them, text them, or tell them in person. Never write the password on the drive or include it in the same package. Keeping the key separate from the lock is what makes this genuinely secure.</p></div>
+        <div class="faq-q">What if I forget the password?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>There's no recovery option by design — this is what makes it secure. You can add an optional hint when setting up the vault.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Can I send entire folders — not just single files?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>Yes. Select any folder and FileLocker automatically bundles everything inside it before locking. Your client receives the complete folder structure when they unlock.</p></div>
+        <div class="faq-q">Is my data stored on any server?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>No. FileLocker operates entirely offline. No file, password, or metadata ever touches a server. There are no cloud accounts and no internet connection required at any point.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Is my data stored anywhere?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>No. FileLocker operates entirely offline. No file, no password, and no document name ever touches any server. There is no cloud component and no internet connection required at any point — for you or your client.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Is there a free trial?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>There is no free trial. Instead, watch our 90-second demo video to see the complete workflow before you buy. If FileLocker doesn't work exactly as described within 30 days, contact us for a full refund — no questions asked.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What does "one-time payment" actually mean?<span class="plus mono">+</span></div>
-        <div class="faq-a"><p>You pay $29 once. You own FileLocker forever. No annual renewal. No subscription. No email reminding you to update your billing. Lifetime updates are included.</p></div>
+        <div class="faq-q">Is there a free trial or money-back guarantee?<span class="plus mono">+</span></div>
+        <div class="faq-a"><p>We don't offer a free trial, but we provide a strict 30-day no-questions-asked money-back guarantee so you can try it completely risk-free.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA SECTION (dark) -->
-<section style="padding: 0;">
+<section>
   <div class="wrap">
-    <div class="final-cta" style="background: var(--navy-deep); color: #fff; padding: 72px 40px; text-align: center;">
-      <h2 style="color: #fff; max-width: 600px; margin: 0 auto 16px;">Your clients deserve better than an unprotected USB drive.</h2>
-      <p style="color: #B9C0CD; max-width: 600px; margin: 0 auto 32px;">Every time you hand over a plain drive, you are one lost USB away from a data breach, a compliance problem, and a client who no longer trusts you.<br><br><strong style="color: #fff;">FileLocker fixes that. In under 60 seconds.</strong></p>
-      <div class="hero-actions" style="justify-content: center; margin-bottom: 24px;">
-        <a href="/pricing.html" class="btn btn-primary" style="background: var(--brass);">Get FileLocker — $29 →</a>
-        <a href="#demo" class="btn btn-ghost" style="color: #fff; border-color: rgba(255,255,255,0.3);">Watch the demo</a>
+    <div class="final-cta">
+      <h2>Your clients deserve better than a plain USB.</h2>
+      <p>Start delivering sensitive files the way professionals should — encrypted, clean, and with zero friction for the person receiving them.</p>
+      <div class="hero-actions">
+        <a href="/pricing.html" class="btn btn-primary">Get FileLocker — $29 →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
-      <div class="note mono" style="color: var(--brass-soft);">ONE-TIME PAYMENT · 30-DAY MONEY-BACK GUARANTEE · WINDOWS 10 & 11 · LIFETIME UPDATES INCLUDED</div>
+      <div class="note mono">ONE-TIME PAYMENT · NO SUBSCRIPTION · WINDOWS 10 &amp; 11</div>
     </div>
   </div>
 </section>
