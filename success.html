@@ -42,6 +42,13 @@
     .split-left { display: none; }
     .split-right { padding: 40px 20px; }
   }
+
+  @keyframes rotate { 100% { transform: rotate(360deg); } }
+  @keyframes dash {
+    0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+    50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+    100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+  }
 </style>
 </head>
 <body>
@@ -69,12 +76,20 @@
     
     <div class="auth-header">
       <h1>Payment Successful!</h1>
-      <p id="subtitle" style="color: #6B7280; font-size: 16px; line-height: 1.5;">We're verifying your payment and generating your License Key...</p>
+      <p id="subtitle" style="color: #6B7280; font-size: 16px; line-height: 1.5;">Securely verifying payment with Lemon Squeezy... this usually takes about 20 seconds.</p>
     </div>
     
     <div class="license-box">
       <div class="license-label">Your Pro License Key</div>
-      <input type="text" id="licenseKey" class="key-input" readonly value="Generating...">
+      
+      <div id="loadingState" style="padding: 24px 0; margin-bottom: 24px; border: 2px dashed #D1D5DB; border-radius: 8px; background: #F9FAFB;">
+        <svg viewBox="0 0 50 50" style="width: 32px; height: 32px; animation: rotate 2s linear infinite; margin: 0 auto 12px; display: block;">
+          <circle cx="25" cy="25" r="20" fill="none" stroke="#2563EB" stroke-width="4" stroke-linecap="round" style="animation: dash 1.5s ease-in-out infinite;"></circle>
+        </svg>
+        <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: #4B5563; font-weight: 500;">Awaiting webhook...</div>
+      </div>
+
+      <input type="text" id="licenseKey" class="key-input" readonly value="" style="display: none;">
       
       <button id="copyBtn" disabled>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M10 8H18C19.1046 8 20 8.89543 20 10V18C20 19.1046 19.1046 20 18 20H10C8.89543 20 8 19.1046 8 18V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -120,7 +135,11 @@
         const licenses = await res.json();
         if (licenses.length > 0) {
           const data = licenses[licenses.length - 1].license_key;
+          
+          document.getElementById('loadingState').style.display = 'none';
+          keyInput.style.display = 'block';
           keyInput.value = data;
+          
           subtitle.textContent = "Your software is ready to activate.";
           copyBtn.disabled = false;
           
